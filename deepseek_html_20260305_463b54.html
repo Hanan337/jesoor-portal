@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا بلغتك</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Cairo + Amiri -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f6fcf9;
+            color: #1c4d3c;
+            line-height: 1.6;
+            padding: 1.5rem 1rem;
+            display: flex; justify-content: center;
+        }
+        .container { max-width: 1300px; width: 100%; }
+        .verse-container {
+            text-align: center; margin-bottom: 2rem; padding: 1.5rem;
+            background: linear-gradient(135deg, #e7f5ef, #d4ece2);
+            border-radius: 60px; border: 2px solid #b6dfd0;
+        }
+        .verse-ar {
+            font-family: 'Amiri', serif; font-size: 2.2rem; font-weight: 700;
+            color: #0f4e3f; margin-bottom: 0.5rem;
+        }
+        .verse-en {
+            font-size: 1.1rem;
+            color: #2b6b56;
+            font-style: italic;
+            border-top: 1px solid #9bc9b8;
+            padding-top: 0.8rem;
+            display: inline-block;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .main-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #174339;
+            margin: 0.5rem 0 0.2rem;
+            background: rgba(255,255,255,0.5);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            display: inline-block;
+            line-height: 1.4;
+        }
+        .main-title-en {
+            font-size: 1.5rem;
+            color: #2f6b5c;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .update-date {
+            background: #e6f4ee; padding: 0.5rem 2rem; border-radius: 40px;
+            display: inline-block; margin: 0.5rem auto; font-weight: 600;
+            border-right: 5px solid #12805c;
+        }
+        .languages-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;
+            margin: 2rem 0;
+        }
+        .lang-card {
+            background: white; border: 2px solid #c0e4d6; border-radius: 50px;
+            padding: 0.7rem 1.8rem; font-size: 1.2rem; font-weight: 600; color: #11614a;
+            cursor: pointer; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,40,20,0.1);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .lang-card i { color: #25a36b; font-size: 1.4rem; }
+        .lang-card.active { background: #1b6d56; border-color: #1b6d56; color: white; }
+        .lang-card.active i { color: white; }
+        .counter-badge {
+            background: #daf2e8; padding: 0.6rem 2rem; border-radius: 40px;
+            width: fit-content; margin: 1rem auto; font-weight: 700;
+            border-right: 6px solid #12805c;
+        }
+        .daee-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem; margin: 2rem 0;
+        }
+        .daee-card {
+            background: white; border-radius: 32px; padding: 1.8rem;
+            box-shadow: 0 10px 20px rgba(0,50,20,0.1); border: 1px solid #d0eee3;
+            transition: 0.2s;
+        }
+        .daee-card:hover { transform: translateY(-5px); box-shadow: 0 15px 25px -8px #0f5e48; }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
+        .avatar {
+            width: 60px; height: 60px; background: linear-gradient(145deg, #1d886b, #116b51);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 2rem; font-weight: 700;
+        }
+        .female-avatar { background: linear-gradient(145deg, #b0678f, #914672); }
+        .name { font-size: 1.7rem; font-weight: 700; color: #094734; }
+        .languages-list {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; background: #effbf5;
+            padding: 0.8rem; border-radius: 30px; margin: 0.8rem 0;
+        }
+        .lang-tag {
+            background: #c1eadc; padding: 0.2rem 1rem; border-radius: 30px;
+            color: #004d33; font-weight: 600; font-size: 0.9rem;
+        }
+        .phone-box {
+            direction: ltr; text-align: left; background: #ecf9f2;
+            padding: 0.6rem 1rem; border-radius: 40px; font-family: monospace;
+            font-size: 1.2rem; margin: 0.8rem 0; border: 1px dashed #3aa17e;
+        }
+        .wa-link {
+            background: #25D366; color: white; border-radius: 60px;
+            padding: 0.8rem; font-weight: 700; text-decoration: none;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: 0.2s;
+        }
+        .wa-link i { font-size: 1.6rem; }
+        .wa-link:hover { background: #128C7E; }
+        .contact-number {
+            margin: 2rem auto; padding: 1rem 2rem; background: #fff3d6;
+            border-radius: 60px; text-align: center; max-width: 700px;
+            border: 2px solid #c4b59b;
+        }
+        .contact-number a { color: #0f4e3f; font-weight: 700; text-decoration: none; }
+        .contact-number .society { font-weight: 700; color: #1d6e58; }
+        .contact-number .instruction-en { font-size: 0.9rem; color: #3d6b5a; margin-top: 0.2rem; }
+        .source-link {
+            margin: 1.5rem auto; text-align: center;
+        }
+        .source-link a {
+            background: #e6d5b8; color: #3d2f1a; padding: 0.6rem 2rem;
+            border-radius: 40px; text-decoration: none; display: inline-block;
+            border: 2px solid #b89b7a; transition: 0.2s;
+        }
+        .source-link a:hover { background: #dac29c; }
+        .bayyinah-footer {
+            margin: 2rem 0 1rem;
+            padding: 1.5rem 1rem;
+            background: #e0f2ea;
+            border-radius: 50px;
+            text-align: center;
+            border: 1px solid #a3cfc0;
+        }
+        .bayyinah-footer a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #1d6e58;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            border: 1px solid #0f5c46;
+            box-shadow: 0 4px 8px rgba(0,60,30,0.15);
+        }
+        .bayyinah-footer a:hover {
+            background: #0b5d45;
+            transform: scale(1.01);
+        }
+        .bayyinah-footer a i {
+            font-size: 1.4rem;
+        }
+        .footer-note {
+            margin-top: 0.8rem;
+            color: #1c6a53;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .footer-note-en {
+            font-size: 0.9rem;
+            color: #3d6e5c;
+            margin-top: 0.2rem;
+            font-style: italic;
+        }
+        .no-daees { text-align: center; padding: 3rem; background: #f1fcf6; border-radius: 50px; }
+        .loading { text-align: center; font-size: 1.5rem; padding: 3rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الآية -->
+        <div class="verse-container">
+            <div class="verse-ar">{وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِلْعَالَمِينَ}</div>
+            <div class="verse-en">“And We have not sent you, [O Muhammad], except as a mercy to the worlds.”</div>
+        </div>
+
+        <!-- العنوان الرئيسي: هل لديك تساؤل؟ تواصل معنا بلغتك -->
+        <div class="header">
+            <h1 class="main-title">هل لديك تساؤل؟ تواصل معنا بلغتك</h1>
+            <div class="main-title-en">Do you have a question? Contact us in your language</div>
+            <div class="update-date">آخر تحديث: 1447هـ / 2026م</div>
+        </div>
+
+        <!-- أزرار اللغات -->
+        <div id="languagesGrid" class="languages-grid"></div>
+
+        <!-- عداد الدعاة -->
+        <div class="counter-badge"><i class="fas fa-users"></i> <span id="daeeCount">0</span> داعية متاح</div>
+
+        <!-- شبكة الدعاة -->
+        <div id="daeeGridContainer" class="daee-grid"><div class="loading">جاري تحميل البيانات...</div></div>
+
+        <!-- الرقم الموحد -->
+        <div class="contact-number">
+            <span class="society">جمعية الدعوة والإرشاد وتوعية الجاليات بحي السلامة - جدة</span><br>
+            <a href="https://wa.me/966503500787" target="_blank">0503500787</a> (أرسل الاسم والجنسية)
+            <div class="instruction-en">Send name and nationality</div>
+        </div>
+
+        <!-- رابط المصدر -->
+        <div class="source-link">
+            <a href="https://drive.google.com/drive/folders/1x7zp7ioic-GrYpBfqU6NtHXMvsjFWnox?usp=sharing" target="_blank">
+                <i class="fas fa-folder-open"></i> المصدر
+            </a>
+        </div>
+
+        <!-- بيان الإسلام -->
+        <div class="bayyinah-footer">
+            <a href="https://byenah.com/ar" target="_blank">
+                <i class="fas fa-book-open"></i> موسوعة بيان الإسلام
+                <span style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.9rem;">120+</span>
+            </a>
+            <div class="footer-note">
+                مواد منتقاه للتعريف بالإسلام وتعليمه باللغات بأكثر من (120) لغة
+            </div>
+            <div class="footer-note-en">
+                Selected materials to introduce and teach Islam in more than 120 languages
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ========== إعداد Firebase ==========
+            const firebaseConfig = {
+                apiKey: "AIzaSyBW-jt-wArS4Uy0mirm8wADDc2iz-GVXWQ",
+                authDomain: "joso-rahama.firebaseapp.com",
+                databaseURL: "https://joso-rahama-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "joso-rahama",
+                storageBucket: "joso-rahama.firebasestorage.app",
+                messagingSenderId: "17002358185",
+                appId: "1:17002358185:web:44618bde214fcfc80450b8"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+
+            function trackEvent(eventName, eventData = {}) {
+                const eventsRef = database.ref('events').push();
+                eventsRef.set({
+                    event: eventName,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    ...eventData
+                }).catch(error => console.warn('خطأ في تسجيل الحدث:', error));
+                
+                const counterRef = database.ref('counters/' + eventName);
+                counterRef.transaction(current => (current || 0) + 1);
+
+                if (eventName === 'language_select' && eventData.language_arabic) {
+                    const langKey = 'language_' + eventData.language_arabic;
+                    const langCounterRef = database.ref('language_counts/' + langKey);
+                    langCounterRef.transaction(current => (current || 0) + 1);
+                }
+            }
+
+            trackEvent('page_view');
+
+            const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
+
+            const buttonTranslations = {
+                'نيبالي': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
+                'إنجليزي': { male: 'Chat', female: 'Chat' },
+                'أوغندي': { male: 'Tuwulize', female: 'Tuwulize' },
+                'كيني': { male: 'Ongea', female: 'Ongea' },
+                'فلبيني': { male: 'Makipag-usap', female: 'Makipag-usap' },
+                'هندي': { male: 'बात करें', female: 'बात करें' },
+                'أوردو': { male: 'بات کریں', female: 'بات کریں' },
+                'بنغالي': { male: 'কথা বলুন', female: 'কথা বলুন' },
+                'تاميلي': { male: 'பேசுங்கள்', female: 'பேசுங்கள்' },
+                'إثيوبي': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
+                'فرنسي': { male: 'Parler', female: 'Parler' },
+                'ملايو': { male: 'Bercakap', female: 'Bercakap' },
+                'بشتو': { male: 'خبرې کول', female: 'خبرې کول' },
+                'سريلانكي': { male: 'කතා කරන්න', female: 'කතා කරන්න' }
+            };
+
+            async function loadData() {
+                try {
+                    const response = await fetch(CSV_URL);
+                    const csvText = await response.text();
+                    const rows = csvText.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"|"$/g, '')));
+                    const headers = rows[0];
+                    
+                    const daeesRaw = [];
+                    for (let i = 1; i < rows.length; i++) {
+                        const row = rows[i];
+                        if (row.length < 5) continue;
+                        const obj = {};
+                        headers.forEach((header, index) => {
+                            obj[header] = row[index] || '';
+                        });
+                        daeesRaw.push({
+                            name: obj.name,
+                            number: obj.number,
+                            gender: obj.gender,
+                            lang: { ar: obj.language_ar, native: obj.language_native }
+                        });
+                    }
+                    return daeesRaw;
+                } catch (error) {
+                    console.error('خطأ في تحميل البيانات:', error);
+                    return [];
+                }
+            }
+
+            function mergeDaees(rawList) {
+                const map = new Map();
+                rawList.forEach(item => {
+                    const key = `${item.number}_${item.name}`;
+                    if (map.has(key)) {
+                        const existing = map.get(key);
+                        const exists = existing.langs.some(l => l.ar === item.lang.ar && l.native === item.lang.native);
+                        if (!exists) existing.langs.push(item.lang);
+                    } else {
+                        map.set(key, { name: item.name, number: item.number, gender: item.gender, langs: [item.lang] });
+                    }
+                });
+                return Array.from(map.values());
+            }
+
+            async function init() {
+                const rawData = await loadData();
+                if (rawData.length === 0) {
+                    document.getElementById('daeeGridContainer').innerHTML = '<div class="no-daees">لم يتم تحميل البيانات. تأكد من الرابط.</div>';
+                    return;
+                }
+
+                const daees = mergeDaees(rawData);
+
+                const langSet = new Map();
+                daees.forEach(d => {
+                    d.langs.forEach(l => {
+                        const key = `${l.ar}|${l.native}`;
+                        if (!langSet.has(key)) langSet.set(key, { ar: l.ar, native: l.native });
+                    });
+                });
+                const uniqueLangs = Array.from(langSet.values()).sort((a, b) => a.ar.localeCompare(b.ar, 'ar'));
+
+                const langGrid = document.getElementById('languagesGrid');
+                const countSpan = document.getElementById('daeeCount');
+                const daeeContainer = document.getElementById('daeeGridContainer');
+                daeeContainer.innerHTML = '';
+
+                function renderLangButtons() {
+                    let html = '';
+                    uniqueLangs.forEach(lang => {
+                        html += `<div class="lang-card" data-lang-ar="${lang.ar}" data-lang-native="${lang.native}">
+                            <i class="fab fa-whatsapp"></i> ${lang.ar} <span style="font-size:0.9rem;">${lang.native}</span>
+                        </div>`;
+                    });
+                    langGrid.innerHTML = html;
+
+                    document.querySelectorAll('.lang-card').forEach(card => {
+                        card.addEventListener('click', function() {
+                            document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('active'));
+                            this.classList.add('active');
+                            const arLang = this.dataset.langAr;
+                            const nativeLang = this.dataset.langNative;
+                            
+                            trackEvent('language_select', { language_arabic: arLang, language_native: nativeLang });
+                            
+                            filterByLang(arLang, nativeLang);
+                        });
+                    });
+
+                    if (uniqueLangs.length > 0) {
+                        const first = uniqueLangs[0];
+                        const firstBtn = document.querySelector(`.lang-card[data-lang-ar="${first.ar}"]`);
+                        if (firstBtn) { firstBtn.classList.add('active'); filterByLang(first.ar, first.native); }
+                    }
+                }
+
+                function filterByLang(arLang, nativeLang) {
+                    const filtered = daees.filter(d => d.langs.some(l => l.ar === arLang && l.native === nativeLang));
+                    countSpan.innerText = filtered.length;
+                    if (filtered.length === 0) {
+                        daeeContainer.innerHTML = '<div class="no-daees">لا يوجد دعاة متاحون لهذه اللغة حالياً</div>';
+                        return;
+                    }
+
+                    const translation = buttonTranslations[arLang] || { male: 'تحدث معه', female: 'تحدث معها' };
+
+                    let cards = '';
+                    filtered.forEach(d => {
+                        const isFemale = d.gender === 'female';
+                        const initial = d.name.charAt(0);
+                        const langTags = d.langs.map(l => `<span class="lang-tag">${l.ar} · ${l.native}</span>`).join(' ');
+                        const waUrl = `https://wa.me/${d.number}`;
+                        const btnText = isFemale ? (translation.female || translation.male) : translation.male;
+
+                        cards += `
+                            <div class="daee-card">
+                                <div class="card-header">
+                                    <div class="avatar ${isFemale ? 'female-avatar' : ''}">${initial}</div>
+                                    <span class="name">${d.name} ${isFemale ? '<i class="fas fa-venus" style="color:#b34e7a; margin-right:5px;"></i>' : ''}</span>
+                                </div>
+                                <div class="languages-list">${langTags}</div>
+                                <div class="phone-box">📞 ${d.number}</div>
+                                <a class="wa-link" href="${waUrl}" target="_blank"><i class="fab fa-whatsapp"></i> ${btnText}</a>
+                            </div>
+                        `;
+                    });
+                    daeeContainer.innerHTML = cards;
+
+                    document.querySelectorAll('.wa-link').forEach(link => {
+                        link.addEventListener('click', function() {
+                            trackEvent('whatsapp_click', { preacher: this.closest('.daee-card').querySelector('.name').innerText.split(' ')[0] });
+                        });
+                    });
+                }
+
+                renderLangButtons();
+
+                document.querySelector('.source-link a').addEventListener('click', function() {
+                    trackEvent('source_click');
+                });
+                document.querySelector('.bayyinah-footer a').addEventListener('click', function() {
+                    trackEvent('bayyinah_click');
+                });
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
