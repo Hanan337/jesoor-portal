@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts: Cairo + Amiri -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (مع App Check) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-check-compat.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -71,13 +72,22 @@
         }
         .lang-card {
             background: white; border: 2px solid #c0e4d6; border-radius: 50px;
-            padding: 0.7rem 1.8rem; font-size: 1.2rem; font-weight: 600; color: #11614a;
+            padding: 0.8rem 2rem;
+            font-size: 1.4rem;
+            font-weight: 600; color: #11614a;
             cursor: pointer; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,40,20,0.1);
             display: inline-flex; align-items: center; gap: 8px;
         }
-        .lang-card i { color: #25a36b; font-size: 1.4rem; }
+        .lang-card i { color: #25a36b; font-size: 1.6rem; }
         .lang-card.active { background: #1b6d56; border-color: #1b6d56; color: white; }
         .lang-card.active i { color: white; }
+        .lang-card .native-lang { font-size: 1.1rem; }
+        /* تنسيق الإيموجي */
+        .lang-emoji {
+            font-size: 1.6rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
         .counter-badge {
             background: #daf2e8; padding: 0.6rem 2rem; border-radius: 40px;
             width: fit-content; margin: 1rem auto; font-weight: 700;
@@ -127,27 +137,32 @@
             border-radius: 60px; text-align: center; max-width: 700px;
             border: 2px solid #c4b59b;
         }
-        .contact-number a { color: #0f4e3f; font-weight: 700; text-decoration: none; }
+        .contact-number a { 
+            color: #0f4e3f; 
+            font-weight: 700; 
+            text-decoration: none; 
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e6f4ee;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin: 0 0.3rem;
+        }
+        .contact-number a i { color: #25D366; font-size: 1.3rem; }
         .contact-number .society { font-weight: 700; color: #1d6e58; }
         .contact-number .instruction-en { font-size: 0.9rem; color: #3d6b5a; margin-top: 0.2rem; }
-        .source-link {
-            margin: 1.5rem auto; text-align: center;
-        }
-        .source-link a {
-            background: #e6d5b8; color: #3d2f1a; padding: 0.6rem 2rem;
-            border-radius: 40px; text-decoration: none; display: inline-block;
-            border: 2px solid #b89b7a; transition: 0.2s;
-        }
-        .source-link a:hover { background: #dac29c; }
-        .bayyinah-footer {
-            margin: 2rem 0 1rem;
+        /* قسم بيان الإسلام */
+        .bayyinah-section {
+            margin: 2rem auto;
             padding: 1.5rem 1rem;
             background: #e0f2ea;
             border-radius: 50px;
             text-align: center;
             border: 1px solid #a3cfc0;
+            max-width: 900px;
         }
-        .bayyinah-footer a {
+        .bayyinah-section a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -162,25 +177,71 @@
             transition: 0.2s;
             border: 1px solid #0f5c46;
             box-shadow: 0 4px 8px rgba(0,60,30,0.15);
+            flex-wrap: wrap;
         }
-        .bayyinah-footer a:hover {
+        .bayyinah-section a:hover {
             background: #0b5d45;
             transform: scale(1.01);
         }
-        .bayyinah-footer a i {
+        .bayyinah-section a i {
             font-size: 1.4rem;
         }
-        .footer-note {
+        .bayyinah-note {
             margin-top: 0.8rem;
             color: #1c6a53;
             font-size: 1rem;
             font-weight: 500;
         }
-        .footer-note-en {
+        .bayyinah-note-en {
             font-size: 0.9rem;
             color: #3d6e5c;
             margin-top: 0.2rem;
             font-style: italic;
+        }
+        /* تذييل المعلومات */
+        .footer-info {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: #e9f5ef;
+            border-radius: 40px;
+            border: 1px solid #b8dfd0;
+        }
+        .footer-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f4e3f;
+            margin-bottom: 0.8rem;
+            border-right: 4px solid #12805c;
+            padding-right: 0.8rem;
+        }
+        .footer-info p {
+            font-size: 0.95rem;
+            color: #246b58;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .footer-info a {
+            color: #0f4e3f;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e6f4ee;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            margin: 0.3rem 0;
+        }
+        .footer-info a:hover {
+            background: #d2eadf;
+        }
+        .footer-info i {
+            font-size: 1.3rem;
+            color: #12805c;
+        }
+        .footer-info hr {
+            margin: 1.5rem 0;
+            border: 1px dashed #b6d9cf;
         }
         .no-daees { text-align: center; padding: 3rem; background: #f1fcf6; border-radius: 50px; }
         .loading { text-align: center; font-size: 1.5rem; padding: 3rem; }
@@ -194,10 +255,10 @@
             <div class="verse-en">“And We have not sent you, [O Muhammad], except as a mercy to the worlds.”</div>
         </div>
 
-        <!-- العنوان الرئيسي: هل لديك تساؤل؟ تواصل معنا بلغتك -->
+        <!-- العنوان الرئيسي (تم التعديل هنا) -->
         <div class="header">
-            <h1 class="main-title">هل لديك تساؤل؟ تواصل معنا بلغتك</h1>
-            <div class="main-title-en">Do you have a question? Contact us in your language</div>
+            <h1 class="main-title">هل لديك أي تساؤلات؟ تواصل معنا بلغتك</h1>
+            <div class="main-title-en">Have questions?? Contact us in your language.</div>
             <div class="update-date">آخر تحديث: 1447هـ / 2026م</div>
         </div>
 
@@ -213,29 +274,38 @@
         <!-- الرقم الموحد -->
         <div class="contact-number">
             <span class="society">جمعية الدعوة والإرشاد وتوعية الجاليات بحي السلامة - جدة</span><br>
-            <a href="https://wa.me/966503500787" target="_blank">0503500787</a> (أرسل الاسم والجنسية)
+            <a href="https://wa.me/966503500787" target="_blank">
+                <i class="fab fa-whatsapp"></i> 0503500787
+            </a> (أرسل الاسم والجنسية)
             <div class="instruction-en">Send name and nationality</div>
         </div>
 
-        <!-- رابط المصدر -->
-        <div class="source-link">
-            <a href="https://drive.google.com/drive/folders/1x7zp7ioic-GrYpBfqU6NtHXMvsjFWnox?usp=sharing" target="_blank">
-                <i class="fas fa-folder-open"></i> المصدر
-            </a>
-        </div>
-
         <!-- بيان الإسلام -->
-        <div class="bayyinah-footer">
+        <div class="bayyinah-section">
             <a href="https://byenah.com/ar" target="_blank">
-                <i class="fas fa-book-open"></i> موسوعة بيان الإسلام
+                <i class="fas fa-book-open"></i> موسوعة بيان الإسلام | Bayan Al-Islam Encyclopedia
                 <span style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.9rem;">120+</span>
             </a>
-            <div class="footer-note">
+            <div class="bayyinah-note">
                 مواد منتقاه للتعريف بالإسلام وتعليمه باللغات بأكثر من (120) لغة
             </div>
-            <div class="footer-note-en">
+            <div class="bayyinah-note-en">
                 Selected materials to introduce and teach Islam in more than 120 languages
             </div>
+        </div>
+
+        <!-- تذييل المعلومات -->
+        <div class="footer-info">
+            <h3>📚 المصادر</h3>
+            <p>تم جمع جهات التواصل من جمعيات ومراكز إسلامية عديدة لتسهيل الوصول إليها، ويمكنك الاطلاع على قائمة المصادر التي استُقينا منها البيانات عبر الرابط التالي:</p>
+            <p>
+                <a href="https://drive.google.com/drive/folders/1x7zp7ioic-GrYpBfqU6NtHXMvsjFWnox?usp=sharing" target="_blank">
+                    <i class="fas fa-folder-open"></i> المصادر
+                </a>
+            </p>
+            <hr>
+            <h3>🌐 إضافات إثرائية</h3>
+            <p>للمزيد من الفائدة العلمية والشرعية، قمنا بإضافة "موسوعة بيان الإسلام" كمرجع موصى به؛ فهي تحتوي على مواد منتقاة للتعريف بالإسلام وتعليمه باللغات، تتضمن مواد مرئية ومقروءة ومسموعة، لبيان حقيقة الإسلام ولتعليم المسلم ما يحتاجه لإقامة دينه. وتعد أحد مشاريع جمعية خدمة المحتوى الإسلامي باللغات.</p>
         </div>
     </div>
 
@@ -253,6 +323,8 @@
             };
 
             firebase.initializeApp(firebaseConfig);
+            const appCheck = firebase.appCheck();
+            appCheck.activate('6LeJCIEsAAAAAExU4C8WxOHOOeUwdousTMteEfbfF');
             const database = firebase.database();
 
             function trackEvent(eventName, eventData = {}) {
@@ -277,21 +349,92 @@
 
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
 
+            // ========== قاموس رموز الأعلام التعبيرية (موسع) ==========
+            const languageEmoji = {
+                // اللغات الأساسية بالعربية
+                'نيبالي': '🇳🇵',
+                'إنجليزي': '🇬🇧',
+                'أوغندي': '🇺🇬',
+                'كيني': '🇰🇪',
+                'سواحلية': '🇰🇪',
+                'فلبيني': '🇵🇭',
+                'هندي': '🇮🇳',
+                'أوردو': '🇵🇰',
+                'بنغالي': '🇧🇩',
+                'تاميلي': '🇱🇰',
+                'إثيوبي': '🇪🇹',
+                'أمهرية': '🇪🇹',
+                'أورومو': '🇪🇹',
+                'فرنسي': '🇫🇷',
+                'ملايو': '🇲🇾',
+                'بشتو': '🇦🇫',
+                'سريلانكي': '🇱🇰',
+                'سنهالي': '🇱🇰',
+                'حبشي': '🇪🇹',
+                'تيلوغو': '🇮🇳',
+                'مليبارية': '🇮🇳',
+                'فيتنامي': '🇻🇳',
+                'فيتنامية': '🇻🇳',
+                'أوغندية': '🇺🇬',
+                'النيبالية': '🇳🇵',
+                'اليابانية': '🇯🇵',
+                'يوناني': '🇬🇷',
+                'اليونانية': '🇬🇷',
+                'عربي': '🇸🇦',
+                'العربية': '🇸🇦',
+                // الأسماء الأصلية (لاتينية)
+                'Nepali': '🇳🇵',
+                'English': '🇬🇧',
+                'Luganda': '🇺🇬',
+                'Swahili': '🇰🇪',
+                'Tagalog': '🇵🇭',
+                'Hindi': '🇮🇳',
+                'Urdu': '🇵🇰',
+                'Bengali': '🇧🇩',
+                'Tamil': '🇱🇰',
+                'Amharic': '🇪🇹',
+                'Oromo': '🇪🇹',
+                'Afaan Oromo': '🇪🇹',
+                'Afaan Oromoo': '🇪🇹',
+                'French': '🇫🇷',
+                'Malay': '🇲🇾',
+                'Melayu': '🇲🇾',
+                'Pashto': '🇦🇫',
+                'Sinhala': '🇱🇰',
+                'Sinhalese': '🇱🇰',
+                'Telugu': '🇮🇳',
+                'Malayalam': '🇮🇳',
+                'Vietnamese': '🇻🇳',
+                'Tiếng Việt': '🇻🇳',
+                'Japanese': '🇯🇵',
+                'Greek': '🇬🇷',
+                'Arabic': '🇸🇦'
+            };
+
+            // ========== بيانات الترجمة ==========
             const buttonTranslations = {
                 'نيبالي': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
                 'إنجليزي': { male: 'Chat', female: 'Chat' },
                 'أوغندي': { male: 'Tuwulize', female: 'Tuwulize' },
                 'كيني': { male: 'Ongea', female: 'Ongea' },
+                'سواحلية': { male: 'Ongea', female: 'Ongea' },
                 'فلبيني': { male: 'Makipag-usap', female: 'Makipag-usap' },
                 'هندي': { male: 'बात करें', female: 'बात करें' },
                 'أوردو': { male: 'بات کریں', female: 'بات کریں' },
                 'بنغالي': { male: 'কথা বলুন', female: 'কথা বলুন' },
                 'تاميلي': { male: 'பேசுங்கள்', female: 'பேசுங்கள்' },
                 'إثيوبي': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
+                'أمهرية': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
+                'أورومو': { male: 'Haasa\'u', female: 'Haasa\'u' },
                 'فرنسي': { male: 'Parler', female: 'Parler' },
                 'ملايو': { male: 'Bercakap', female: 'Bercakap' },
                 'بشتو': { male: 'خبرې کول', female: 'خبرې کول' },
-                'سريلانكي': { male: 'කතා කරන්න', female: 'කතා කරන්න' }
+                'سريلانكي': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
+                'سنهالي': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
+                'تيلوغو': { male: 'మాట్లాడండి', female: 'మాట్లాడండి' },
+                'مليبارية': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
+                'فيتنامي': { male: 'Trò chuyện', female: 'Trò chuyện' },
+                'فيتنامية': { male: 'Trò chuyện', female: 'Trò chuyện' }
             };
 
             async function loadData() {
@@ -364,8 +507,11 @@
                 function renderLangButtons() {
                     let html = '';
                     uniqueLangs.forEach(lang => {
+                        // البحث عن الإيموجي: أولاً بالاسم العربي، ثم بالاسم الأصلي، ثم علم أبيض
+                        let emoji = languageEmoji[lang.ar] || languageEmoji[lang.native] || '🏳️';
                         html += `<div class="lang-card" data-lang-ar="${lang.ar}" data-lang-native="${lang.native}">
-                            <i class="fab fa-whatsapp"></i> ${lang.ar} <span style="font-size:0.9rem;">${lang.native}</span>
+                            <span class="lang-emoji">${emoji}</span>
+                            <i class="fab fa-whatsapp"></i> ${lang.ar} <span class="native-lang">${lang.native}</span>
                         </div>`;
                     });
                     langGrid.innerHTML = html;
@@ -398,7 +544,7 @@
                         return;
                     }
 
-                    const translation = buttonTranslations[arLang] || { male: 'تحدث معه', female: 'تحدث معها' };
+                    const translation = buttonTranslations[arLang] || buttonTranslations[nativeLang] || { male: 'تحدث معه', female: 'تحدث معها' };
 
                     let cards = '';
                     filtered.forEach(d => {
@@ -431,12 +577,9 @@
 
                 renderLangButtons();
 
-                document.querySelector('.source-link a').addEventListener('click', function() {
-                    trackEvent('source_click');
-                });
-                document.querySelector('.bayyinah-footer a').addEventListener('click', function() {
-                    trackEvent('bayyinah_click');
-                });
+                // تسجيل النقرات
+                document.querySelector('.bayyinah-section a').addEventListener('click', () => trackEvent('bayyinah_click'));
+                document.querySelector('.footer-info a').addEventListener('click', () => trackEvent('source_click'));
             }
 
             init();
