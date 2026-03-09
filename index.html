@@ -67,6 +67,34 @@
             display: inline-block; margin: 0.5rem auto; font-weight: 600;
             border-right: 5px solid #12805c;
         }
+
+        /* ========== NEW: شريط الإحصائيات ========== */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem auto 2rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border-radius: 60px;
+            border: 2px solid #c0e4d6;
+            box-shadow: 0 4px 8px rgba(0,40,20,0.1);
+            max-width: 400px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #11614a;
+        }
+        .stat-item i {
+            color: #12805c;
+            font-size: 1.4rem;
+        }
+        /* ========== END NEW ========== */
+
         .languages-grid {
             display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;
             margin: 2rem 0;
@@ -263,6 +291,19 @@
             <div class="update-date">آخر تحديث: 1447هـ / 2026م</div>
         </div>
 
+        <!-- ========== NEW: شريط الإحصائيات (ديناميكي) ========== -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span id="totalDaees">0</span> داعية
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-language"></i>
+                <span id="totalLangs">0</span> لغة
+            </div>
+        </div>
+        <!-- ========== END NEW ========== -->
+
         <!-- أزرار اللغات -->
         <div id="languagesGrid" class="languages-grid"></div>
 
@@ -350,7 +391,7 @@
 
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
 
-            // ========== قاموس رموز الأعلام التعبيرية (محدث ومتوافق مع الجدول النهائي) ==========
+            // ========== قاموس رموز الأعلام التعبيرية ==========
             const languageEmoji = {
                 // اللغات الأساسية بالعربية (كما هي في الجدول)
                 'إندونيسي': '🇮🇩',
@@ -420,7 +461,7 @@
                 'مليبارية': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
                 'فيتنامي': { male: 'Trò chuyện', female: 'Trò chuyện' },
                 'فيتنامية': { male: 'Trò chuyện', female: 'Trò chuyện' },
-                'إندونيسي': { male: 'Chat', female: 'Chat' }  // تمت إضافة الترجمة للإندونيسي
+                'إندونيسي': { male: 'Chat', female: 'Chat' }
             };
 
             async function loadData() {
@@ -484,6 +525,11 @@
                     });
                 });
                 const uniqueLangs = Array.from(langSet.values()).sort((a, b) => a.ar.localeCompare(b.ar, 'ar'));
+
+                // ========== NEW: تحديث إحصائيات الدعاة واللغات ==========
+                document.getElementById('totalDaees').innerText = daees.length;
+                document.getElementById('totalLangs').innerText = uniqueLangs.length;
+                // ========== END NEW ==========
 
                 const langGrid = document.getElementById('languagesGrid');
                 const countSpan = document.getElementById('daeeCount');
