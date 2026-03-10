@@ -68,7 +68,7 @@
             border-right: 5px solid #12805c;
         }
 
-        /* ========== NEW: شريط الإحصائيات ========== */
+        /* شريط الإحصائيات */
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -93,7 +93,6 @@
             color: #12805c;
             font-size: 1.4rem;
         }
-        /* ========== END NEW ========== */
 
         .languages-grid {
             display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;
@@ -111,7 +110,6 @@
         .lang-card.active { background: #1b6d56; border-color: #1b6d56; color: white; }
         .lang-card.active i { color: white; }
         .lang-card .native-lang { font-size: 1.1rem; }
-        /* تنسيق الإيموجي */
         .lang-emoji {
             font-size: 1.6rem;
             line-height: 1;
@@ -291,7 +289,7 @@
             <div class="update-date">آخر تحديث: 1447هـ / 2026م</div>
         </div>
 
-        <!-- ========== NEW: شريط الإحصائيات (ديناميكي) ========== -->
+        <!-- شريط الإحصائيات -->
         <div class="stats-bar">
             <div class="stat-item">
                 <i class="fas fa-users"></i>
@@ -302,7 +300,6 @@
                 <span id="totalLangs">0</span> لغة
             </div>
         </div>
-        <!-- ========== END NEW ========== -->
 
         <!-- أزرار اللغات -->
         <div id="languagesGrid" class="languages-grid"></div>
@@ -391,16 +388,16 @@
 
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
 
-            // ========== قاموس رموز الأعلام التعبيرية ==========
+            // ========== قاموس رموز الأعلام التعبيرية (محدث لجميع اللغات) ==========
             const languageEmoji = {
-                // اللغات الأساسية بالعربية (كما هي في الجدول)
+                // اللغات الأساسية بالعربية
+                'إنجليزي': '🇬🇧',
                 'إندونيسي': '🇮🇩',
                 'سنهالي': '🇱🇰',
                 'بنغالي': '🇧🇩',
                 'أوردو': '🇵🇰',
                 'هندي': '🇮🇳',
                 'تيلوغو': '🇮🇳',
-                'إنجليزي': '🇬🇧',
                 'مليباري': '🇮🇳',
                 'فلبيني': '🇵🇭',
                 'بشتو': '🇦🇫',
@@ -412,7 +409,26 @@
                 'كيني': '🇰🇪',
                 'ملايو': '🇲🇾',
                 'تاميلي': '🇱🇰',
-                // مرادفات اللغات الأصلية (لاتينية) - مهمة للبحث الاحتياطي
+                'ميرناو': '🇵🇭',
+                'صومالي': '🇸🇴',
+                'صيني': '🇨🇳',
+                'بنجابي': '🇵🇰',
+                'فارسي': '🇮🇷',
+                'أوزبكي': '🇺🇿',
+                'فرنسي': '🇫🇷',
+                'برتغالي': '🇵🇹',
+                'عربي': '🇸🇦',
+                'العربية': '🇸🇦',
+                'ياباني': '🇯🇵',
+                'هوسا': '🇳🇬',
+                'إسباني': '🇪🇸',
+                'ألماني': '🇩🇪',
+                'سريلانكي': '🇱🇰',
+                'سواحلية': '🇰🇪',
+                'سريانكي': '🇱🇰',
+                'أمهرية': '🇪🇹',
+                // المرادفات اللاتينية
+                'English': '🇬🇧',
                 'Bahasa Indonesia': '🇮🇩',
                 'Sinhala': '🇱🇰',
                 'Sinhalese': '🇱🇰',
@@ -420,7 +436,6 @@
                 'Urdu': '🇵🇰',
                 'Hindi': '🇮🇳',
                 'Telugu': '🇮🇳',
-                'English': '🇬🇧',
                 'Malayalam': '🇮🇳',
                 'Tagalog': '🇵🇭',
                 'Pashto': '🇦🇫',
@@ -434,10 +449,24 @@
                 'Luganda': '🇺🇬',
                 'Swahili': '🇰🇪',
                 'Melayu': '🇲🇾',
-                'Tamil': '🇱🇰'
+                'Tamil': '🇱🇰',
+                'Meranau': '🇵🇭',
+                'Somali': '🇸🇴',
+                'Chinese': '🇨🇳',
+                'Punjabi': '🇵🇰',
+                'Persian': '🇮🇷',
+                'Farsi': '🇮🇷',
+                'Uzbek': '🇺🇿',
+                'French': '🇫🇷',
+                'Português': '🇵🇹',
+                'Arabic': '🇸🇦',
+                'Japanese': '🇯🇵',
+                'Hausa': '🇳🇬',
+                'Spanish': '🇪🇸',
+                'German': '🇩🇪'
             };
 
-            // ========== بيانات الترجمة (محدثة وشاملة لكل اللغات الموجودة) ==========
+            // ========== بيانات الترجمة (محدثة لجميع اللغات) ==========
             const buttonTranslations = {
                 'نيبالي': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
                 'إنجليزي': { male: 'Chat', female: 'Chat' },
@@ -459,9 +488,23 @@
                 'سنهالي': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
                 'تيلوغو': { male: 'మాట్లాడండి', female: 'మాట్లాడండి' },
                 'مليبارية': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
+                'مليباري': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
                 'فيتنامي': { male: 'Trò chuyện', female: 'Trò chuyện' },
                 'فيتنامية': { male: 'Trò chuyện', female: 'Trò chuyện' },
-                'إندونيسي': { male: 'Chat', female: 'Chat' }
+                'إندونيسي': { male: 'Chat', female: 'Chat' },
+                'ياباني': { male: 'チャット', female: 'チャット' }, // Chat باليابانية
+                'هوسا': { male: 'Taɗi', female: 'Taɗi' }, // محادثة بالهوسا
+                'إسباني': { male: 'Chatear', female: 'Chatear' },
+                'ألماني': { male: 'Chatten', female: 'Chatten' },
+                'عربي': { male: 'تحدث', female: 'تحدثي' },
+                'العربية': { male: 'تحدث', female: 'تحدثي' },
+                'صيني': { male: '聊天', female: '聊天' },
+                'بنجابي': { male: 'ਗੱਲ ਕਰੋ', female: 'ਗੱਲ ਕਰੋ' },
+                'فارسي': { male: 'چت', female: 'چت' },
+                'أوزبكي': { male: 'Suhbat', female: 'Suhbat' },
+                'برتغالي': { male: 'Conversar', female: 'Conversar' },
+                'صومالي': { male: 'Sheekeysi', female: 'Sheekeysi' },
+                'ميرناو': { male: 'Makipag-usap', female: 'Makipag-usap' } // نفس الفلبيني
             };
 
             async function loadData() {
@@ -526,10 +569,9 @@
                 });
                 const uniqueLangs = Array.from(langSet.values()).sort((a, b) => a.ar.localeCompare(b.ar, 'ar'));
 
-                // ========== NEW: تحديث إحصائيات الدعاة واللغات ==========
+                // تحديث إحصائيات الدعاة واللغات
                 document.getElementById('totalDaees').innerText = daees.length;
                 document.getElementById('totalLangs').innerText = uniqueLangs.length;
-                // ========== END NEW ==========
 
                 const langGrid = document.getElementById('languagesGrid');
                 const countSpan = document.getElementById('daeeCount');
@@ -609,7 +651,7 @@
 
                 renderLangButtons();
 
-                // تسجيل النقرات
+                // 
                 document.querySelector('.bayyinah-section a').addEventListener('click', () => trackEvent('bayyinah_click'));
                 document.querySelector('.footer-info a').addEventListener('click', () => trackEvent('source_click'));
             }
