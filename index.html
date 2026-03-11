@@ -153,32 +153,81 @@
         }
         .wa-link {
             background: #25D366; color: white; border-radius: 60px;
-            padding: 0.8rem; font-weight: 700; text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 0.8rem 0.5rem;
+            font-weight: 700; text-decoration: none;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
             transition: 0.2s;
+            font-size: 0.95rem;
+            text-align: center;
+            white-space: normal;
+            word-break: keep-all;
+            line-height: 1.4;
+            min-height: 60px;
         }
-        .wa-link i { font-size: 1.6rem; }
+        .wa-link i { font-size: 1.6rem; flex-shrink: 0; }
         .wa-link:hover { background: #128C7E; }
+
+        /* قسم أرقام التواصل العامة */
         .contact-number {
-            margin: 2rem auto; padding: 1rem 2rem; background: #fff3d6;
-            border-radius: 60px; text-align: center; max-width: 700px;
+            margin: 2rem auto;
+            padding: 1.2rem 1.5rem;
+            background: #fff3d6;
+            border-radius: 60px;
+            text-align: center;
+            max-width: 800px;
             border: 2px solid #c4b59b;
         }
-        .contact-number a { 
-            color: #0f4e3f; 
-            font-weight: 700; 
-            text-decoration: none; 
+        .contact-title {
+            font-weight: 700;
+            color: #1d6e58;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px dotted #c4b59b;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+        }
+        .contact-numbers-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .contact-number a {
+            color: #0f4e3f;
+            font-weight: 600;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 5px;
             background: #e6f4ee;
             padding: 0.3rem 1rem;
-            border-radius: 40px;
-            margin: 0 0.3rem;
+            border-radius: 30px;
+            transition: 0.1s;
+            border: 1px solid #b1cfc0;
+            font-size: 1rem;
+            white-space: nowrap;
         }
-        .contact-number a i { color: #25D366; font-size: 1.3rem; }
-        .contact-number .society { font-weight: 700; color: #1d6e58; }
-        .contact-number .instruction-en { font-size: 0.9rem; color: #3d6b5a; margin-top: 0.2rem; }
+        .contact-number a:hover {
+            background: #d2eadf;
+        }
+        .contact-number a i {
+            color: #25D366; 
+            font-size: 1rem;
+            margin-left: 0.2rem;
+        }
+        .contact-number .society-phone {
+            font-size: 0.9rem;
+            font-family: monospace;
+            margin-right: 0.2rem;
+        }
+        .contact-instruction {
+            font-size: 0.9rem;
+            color: #3d6b5a;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
         /* قسم بيان الإسلام */
         .bayyinah-section {
             margin: 2rem auto;
@@ -247,6 +296,13 @@
             line-height: 1.7;
             margin-bottom: 1rem;
         }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
         .footer-info a {
             color: #0f4e3f;
             font-weight: 600;
@@ -257,7 +313,8 @@
             background: #e6f4ee;
             padding: 0.4rem 1.2rem;
             border-radius: 40px;
-            margin: 0.3rem 0;
+            margin: 0;
+            border: 1px solid #b8dfd0;
         }
         .footer-info a:hover {
             background: #d2eadf;
@@ -310,13 +367,18 @@
         <!-- شبكة الدعاة -->
         <div id="daeeGridContainer" class="daee-grid"><div class="loading">جاري تحميل البيانات...</div></div>
 
-        <!-- الرقم الموحد -->
+        <!-- أرقام التواصل العامة -->
         <div class="contact-number">
-            <span class="society">جمعية الدعوة والإرشاد وتوعية الجاليات بحي السلامة - جدة</span><br>
-            <a href="https://wa.me/966503500787" target="_blank">
-                <i class="fab fa-whatsapp"></i> 0503500787
-            </a> (أرسل الاسم والجنسية)
-            <div class="instruction-en">Send name and nationality</div>
+            <div class="contact-title">أرقام التواصل العامة لجمعيات دعوة وإرشاد وتوعية الجاليات</div>
+            <div class="contact-numbers-wrapper">
+                <a href="https://wa.me/966503500787" target="_blank" id="society1Link">
+                    <i class="fab fa-whatsapp"></i> جمعية السلامة - جدة: <span class="society-phone">0503500787</span>
+                </a>
+                <a href="https://wa.me/966500464998" target="_blank" id="society2Link">
+                    <i class="fab fa-whatsapp"></i> جمعية شمال بيشة: <span class="society-phone">0500464998</span>
+                </a>
+            </div>
+            <div class="contact-instruction">(أرسل الاسم والجنسية لأي من هذه الأرقام)</div>
         </div>
 
         <!-- بيان الإسلام -->
@@ -335,13 +397,16 @@
 
         <!-- تذييل المعلومات -->
         <div class="footer-info">
-            <h3>📚 المصادر</h3>
-            <p>تم جمع جهات التواصل من جمعيات ومراكز إسلامية عديدة لتسهيل الوصول إليها، ويمكنك الاطلاع على قائمة المصادر التي استُقينا منها البيانات عبر الرابط التالي:</p>
-            <p>
-                <a href="https://drive.google.com/drive/folders/1x7zp7ioic-GrYpBfqU6NtHXMvsjFWnox?usp=sharing" target="_blank">
+            <h3>📚 المصادر والاقتراحات</h3>
+            <p>تم جمع جهات التواصل من جمعيات ومراكز إسلامية عديدة لتسهيل الوصول إليها. يمكنكم الاطلاع على قائمة المصادر، كما نرحب باقتراحاتكم لتطوير الدليل:</p>
+            <div class="footer-links">
+                <a href="https://drive.google.com/drive/folders/1HbNGrY-KabCGFULXxim5dDai2-ljVSTI?usp=sharing" target="_blank" id="sourcesLink">
                     <i class="fas fa-folder-open"></i> المصادر
                 </a>
-            </p>
+                <a href="https://forms.gle/Ys6UZMwZxVHByTXR6" target="_blank" id="suggestionsLink">
+                    <i class="fas fa-lightbulb"></i> للمقترحات
+                </a>
+            </div>
             <hr>
             <h3>🌐 إضافات إثرائية</h3>
             <p>للمزيد من الفائدة العلمية والشرعية، قمنا بإضافة "موسوعة بيان الإسلام" كمرجع موصى به؛ فهي تحتوي على مواد منتقاة للتعريف بالإسلام وتعليمه باللغات، تتضمن مواد مرئية ومقروءة ومسموعة، لبيان حقيقة الإسلام ولتعليم المسلم ما يحتاجه لإقامة دينه. وتعد أحد مشاريع جمعية خدمة المحتوى الإسلامي باللغات.</p>
@@ -388,123 +453,168 @@
 
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
 
-            // ========== قاموس رموز الأعلام التعبيرية (محدث لجميع اللغات) ==========
+            // ========== قاموس رموز الأعلام التعبيرية (شامل لجميع اللغات الموجودة في البيانات) ==========
             const languageEmoji = {
-                // اللغات الأساسية بالعربية
-                'إنجليزي': '🇬🇧',
-                'إندونيسي': '🇮🇩',
-                'سنهالي': '🇱🇰',
-                'بنغالي': '🇧🇩',
-                'أوردو': '🇵🇰',
-                'هندي': '🇮🇳',
-                'تيلوغو': '🇮🇳',
-                'مليباري': '🇮🇳',
-                'فلبيني': '🇵🇭',
-                'بشتو': '🇦🇫',
-                'إثيوبي': '🇪🇹',
-                'أورومو': '🇪🇹',
-                'نيبالي': '🇳🇵',
-                'فيتنامي': '🇻🇳',
-                'أوغندي': '🇺🇬',
-                'كيني': '🇰🇪',
-                'ملايو': '🇲🇾',
-                'تاميلي': '🇱🇰',
-                'ميرناو': '🇵🇭',
-                'صومالي': '🇸🇴',
-                'صيني': '🇨🇳',
-                'بنجابي': '🇵🇰',
-                'فارسي': '🇮🇷',
-                'أوزبكي': '🇺🇿',
-                'فرنسي': '🇫🇷',
-                'برتغالي': '🇵🇹',
                 'عربي': '🇸🇦',
                 'العربية': '🇸🇦',
-                'ياباني': '🇯🇵',
-                'هوسا': '🇳🇬',
-                'إسباني': '🇪🇸',
-                'ألماني': '🇩🇪',
-                'سريلانكي': '🇱🇰',
-                'سواحلية': '🇰🇪',
-                'سريانكي': '🇱🇰',
-                'أمهرية': '🇪🇹',
-                // المرادفات اللاتينية
+                'إنجليزي': '🇬🇧',
                 'English': '🇬🇧',
+                'إندونيسي': '🇮🇩',
                 'Bahasa Indonesia': '🇮🇩',
+                'سنهالي': '🇱🇰',
+                'සිංහල': '🇱🇰',
                 'Sinhala': '🇱🇰',
-                'Sinhalese': '🇱🇰',
+                'بنغالي': '🇧🇩',
+                'বাংলা': '🇧🇩',
                 'Bengali': '🇧🇩',
+                'أوردو': '🇵🇰',
+                'اردو': '🇵🇰',
                 'Urdu': '🇵🇰',
+                'هندي': '🇮🇳',
+                'हिन्दी': '🇮🇳',
                 'Hindi': '🇮🇳',
+                'تيلوغو': '🇮🇳',
+                'తెలుగు': '🇮🇳',
                 'Telugu': '🇮🇳',
+                'مليباري': '🇮🇳',
                 'Malayalam': '🇮🇳',
+                'فلبيني': '🇵🇭',
                 'Tagalog': '🇵🇭',
+                'بشتو': '🇦🇫',
+                'پښتو': '🇦🇫',
                 'Pashto': '🇦🇫',
+                'إثيوبي': '🇪🇹',
+                'አማርኛ': '🇪🇹',
                 'Amharic': '🇪🇹',
-                'Oromo': '🇪🇹',
-                'Afaan Oromo': '🇪🇹',
+                'أورومو': '🇪🇹',
                 'Afaan Oromoo': '🇪🇹',
+                'Oromo': '🇪🇹',
+                'نيبالي': '🇳🇵',
+                'नेपाली': '🇳🇵',
                 'Nepali': '🇳🇵',
-                'Vietnamese': '🇻🇳',
+                'فيتنامي': '🇻🇳',
                 'Tiếng Việt': '🇻🇳',
+                'Vietnamese': '🇻🇳',
+                'أوغندي': '🇺🇬',
                 'Luganda': '🇺🇬',
+                'كيني': '🇰🇪',
                 'Swahili': '🇰🇪',
+                'ملايو': '🇲🇾',
                 'Melayu': '🇲🇾',
+                'تاميلي': '🇱🇰',
+                'தமிழ்': '🇱🇰',
                 'Tamil': '🇱🇰',
+                'ميرناو': '🇵🇭',
                 'Meranau': '🇵🇭',
+                'صومالي': '🇸🇴',
                 'Somali': '🇸🇴',
+                'صيني': '🇨🇳',
                 'Chinese': '🇨🇳',
+                'بنجابي': '🇵🇰',
                 'Punjabi': '🇵🇰',
+                'فارسي': '🇮🇷',
+                'فارسی': '🇮🇷',
                 'Persian': '🇮🇷',
                 'Farsi': '🇮🇷',
+                'أوزبكي': '🇺🇿',
                 'Uzbek': '🇺🇿',
+                'فرنسي': '🇫🇷',
+                'Français': '🇫🇷',
                 'French': '🇫🇷',
+                'برتغالي': '🇵🇹',
                 'Português': '🇵🇹',
-                'Arabic': '🇸🇦',
+                'Portuguese': '🇵🇹',
+                'ياباني': '🇯🇵',
                 'Japanese': '🇯🇵',
+                'هوسا': '🇳🇬',
                 'Hausa': '🇳🇬',
+                'إسباني': '🇪🇸',
                 'Spanish': '🇪🇸',
-                'German': '🇩🇪'
+                'ألماني': '🇩🇪',
+                'German': '🇩🇪',
+                'أسباني': '🇪🇸', // تصحيح إملائي
             };
 
-            // ========== بيانات الترجمة (محدثة لجميع اللغات) ==========
+            // ========== بيانات الترجمة (شاملة لكل اللغات الموجودة) ==========
             const buttonTranslations = {
-                'نيبالي': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
-                'إنجليزي': { male: 'Chat', female: 'Chat' },
-                'أوغندي': { male: 'Tuwulize', female: 'Tuwulize' },
-                'كيني': { male: 'Ongea', female: 'Ongea' },
-                'سواحلية': { male: 'Ongea', female: 'Ongea' },
-                'فلبيني': { male: 'Makipag-usap', female: 'Makipag-usap' },
-                'هندي': { male: 'बात करें', female: 'बात करें' },
-                'أوردو': { male: 'بات کریں', female: 'بات کریں' },
-                'بنغالي': { male: 'কথা বলুন', female: 'কথা বলুন' },
-                'تاميلي': { male: 'பேசுங்கள்', female: 'பேசுங்கள்' },
-                'إثيوبي': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
-                'أمهرية': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
-                'أورومو': { male: 'Haasa\'u', female: 'Haasa\'u' },
-                'فرنسي': { male: 'Parler', female: 'Parler' },
-                'ملايو': { male: 'Bercakap', female: 'Bercakap' },
-                'بشتو': { male: 'خبرې کول', female: 'خبرې کول' },
-                'سريلانكي': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
-                'سنهالي': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
-                'تيلوغو': { male: 'మాట్లాడండి', female: 'మాట్లాడండి' },
-                'مليبارية': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
-                'مليباري': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
-                'فيتنامي': { male: 'Trò chuyện', female: 'Trò chuyện' },
-                'فيتنامية': { male: 'Trò chuyện', female: 'Trò chuyện' },
-                'إندونيسي': { male: 'Chat', female: 'Chat' },
-                'ياباني': { male: 'チャット', female: 'チャット' }, // Chat باليابانية
-                'هوسا': { male: 'Taɗi', female: 'Taɗi' }, // محادثة بالهوسا
-                'إسباني': { male: 'Chatear', female: 'Chatear' },
-                'ألماني': { male: 'Chatten', female: 'Chatten' },
                 'عربي': { male: 'تحدث', female: 'تحدثي' },
                 'العربية': { male: 'تحدث', female: 'تحدثي' },
-                'صيني': { male: '聊天', female: '聊天' },
-                'بنجابي': { male: 'ਗੱਲ ਕਰੋ', female: 'ਗੱਲ ਕਰੋ' },
-                'فارسي': { male: 'چت', female: 'چت' },
-                'أوزبكي': { male: 'Suhbat', female: 'Suhbat' },
-                'برتغالي': { male: 'Conversar', female: 'Conversar' },
+                'إنجليزي': { male: 'Chat', female: 'Chat' },
+                'English': { male: 'Chat', female: 'Chat' },
+                'إندونيسي': { male: 'Chat', female: 'Chat' },
+                'Bahasa Indonesia': { male: 'Chat', female: 'Chat' },
+                'سنهالي': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
+                'සිංහල': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
+                'Sinhala': { male: 'කතා කරන්න', female: 'කතා කරන්න' },
+                'بنغالي': { male: 'কথা বলুন', female: 'কথা বলুন' },
+                'বাংলা': { male: 'কথা বলুন', female: 'কথা বলুন' },
+                'Bengali': { male: 'কথা বলুন', female: 'কথা বলুন' },
+                'أوردو': { male: 'بات کریں', female: 'بات کریں' },
+                'اردو': { male: 'بات کریں', female: 'بات کریں' },
+                'Urdu': { male: 'بات کریں', female: 'بات کریں' },
+                'هندي': { male: 'बात करें', female: 'बात करें' },
+                'हिन्दी': { male: 'बात करें', female: 'बात करें' },
+                'Hindi': { male: 'बात करें', female: 'बात करें' },
+                'تيلوغو': { male: 'మాట్లాడండి', female: 'మాట్లాడండి' },
+                'తెలుగు': { male: 'మాట్లాడండి', female: 'మాట్లాడండి' },
+                'Telugu': { male: 'మాట్లాడండి', female: 'మాట్లాడండి' },
+                'مليباري': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
+                'Malayalam': { male: 'സംസാരിക്കുക', female: 'സംസാരിക്കുക' },
+                'فلبيني': { male: 'Makipag-usap', female: 'Makipag-usap' },
+                'Tagalog': { male: 'Makipag-usap', female: 'Makipag-usap' },
+                'بشتو': { male: 'خبرې کول', female: 'خبرې کول' },
+                'پښتو': { male: 'خبرې کول', female: 'خبرې کول' },
+                'Pashto': { male: 'خبرې کول', female: 'خبرې کول' },
+                'إثيوبي': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
+                'አማርኛ': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
+                'Amharic': { male: 'ተነጋገር', female: 'ተነጋገሪ' },
+                'أورومو': { male: 'Haasa\'u', female: 'Haasa\'u' },
+                'Afaan Oromoo': { male: 'Haasa\'u', female: 'Haasa\'u' },
+                'Oromo': { male: 'Haasa\'u', female: 'Haasa\'u' },
+                'نيبالي': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
+                'नेपाली': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
+                'Nepali': { male: 'कुरा गर्नुहोस्', female: 'कुरा गर्नुहोस्' },
+                'فيتنامي': { male: 'Trò chuyện', female: 'Trò chuyện' },
+                'Tiếng Việt': { male: 'Trò chuyện', female: 'Trò chuyện' },
+                'Vietnamese': { male: 'Trò chuyện', female: 'Trò chuyện' },
+                'أوغندي': { male: 'Tuwulize', female: 'Tuwulize' },
+                'Luganda': { male: 'Tuwulize', female: 'Tuwulize' },
+                'كيني': { male: 'Ongea', female: 'Ongea' },
+                'Swahili': { male: 'Ongea', female: 'Ongea' },
+                'ملايو': { male: 'Bercakap', female: 'Bercakap' },
+                'Melayu': { male: 'Bercakap', female: 'Bercakap' },
+                'تاميلي': { male: 'பேசுங்கள்', female: 'பேசுங்கள்' },
+                'தமிழ்': { male: 'பேசுங்கள்', female: 'பேசுங்கள்' },
+                'Tamil': { male: 'பேசுங்கள்', female: 'பேசுங்கள்' },
+                'ميرناو': { male: 'Makipag-usap', female: 'Makipag-usap' },
+                'Meranau': { male: 'Makipag-usap', female: 'Makipag-usap' },
                 'صومالي': { male: 'Sheekeysi', female: 'Sheekeysi' },
-                'ميرناو': { male: 'Makipag-usap', female: 'Makipag-usap' } // نفس الفلبيني
+                'Somali': { male: 'Sheekeysi', female: 'Sheekeysi' },
+                'صيني': { male: '聊天', female: '聊天' },
+                'Chinese': { male: '聊天', female: '聊天' },
+                'بنجابي': { male: 'ਗੱਲ ਕਰੋ', female: 'ਗੱਲ ਕਰੋ' },
+                'Punjabi': { male: 'ਗੱਲ ਕਰੋ', female: 'ਗੱਲ ਕਰੋ' },
+                'فارسي': { male: 'چت', female: 'چت' },
+                'فارسی': { male: 'چت', female: 'چت' },
+                'Persian': { male: 'چت', female: 'چت' },
+                'Farsi': { male: 'چت', female: 'چت' },
+                'أوزبكي': { male: 'Suhbat', female: 'Suhbat' },
+                'Uzbek': { male: 'Suhbat', female: 'Suhbat' },
+                'فرنسي': { male: 'Parler', female: 'Parler' },
+                'Français': { male: 'Parler', female: 'Parler' },
+                'French': { male: 'Parler', female: 'Parler' },
+                'برتغالي': { male: 'Conversar', female: 'Conversar' },
+                'Português': { male: 'Conversar', female: 'Conversar' },
+                'Portuguese': { male: 'Conversar', female: 'Conversar' },
+                'ياباني': { male: 'チャット', female: 'チャット' },
+                'Japanese': { male: 'チャット', female: 'チャット' },
+                'هوسا': { male: 'Taɗi', female: 'Taɗi' },
+                'Hausa': { male: 'Taɗi', female: 'Taɗi' },
+                'إسباني': { male: 'Chatear', female: 'Chatear' },
+                'Spanish': { male: 'Chatear', female: 'Chatear' },
+                'ألماني': { male: 'Chatten', female: 'Chatten' },
+                'German': { male: 'Chatten', female: 'Chatten' },
+                'أسباني': { male: 'Chatear', female: 'Chatear' }, // تصحيح
             };
 
             async function loadData() {
@@ -525,7 +635,7 @@
                         daeesRaw.push({
                             name: obj.name,
                             number: obj.number,
-                            gender: obj.gender,
+                            gender: obj.gender || 'male', // افتراضي إذا لم يوجد
                             lang: { ar: obj.language_ar, native: obj.language_native }
                         });
                     }
@@ -539,13 +649,23 @@
             function mergeDaees(rawList) {
                 const map = new Map();
                 rawList.forEach(item => {
-                    const key = `${item.number}_${item.name}`;
+                    // تنظيف الرقم: إزالة أي مسافات أو رموز غير رقمية
+                    let cleanNumber = item.number.replace(/\D/g, '');
+                    // التأكد من وجود مفتاح الدولة 966 إذا لم يكن موجوداً
+                    if (!cleanNumber.startsWith('966')) {
+                        if (cleanNumber.startsWith('0')) {
+                            cleanNumber = '966' + cleanNumber.substring(1);
+                        } else {
+                            cleanNumber = '966' + cleanNumber;
+                        }
+                    }
+                    const key = `${cleanNumber}_${item.name}`;
                     if (map.has(key)) {
                         const existing = map.get(key);
                         const exists = existing.langs.some(l => l.ar === item.lang.ar && l.native === item.lang.native);
                         if (!exists) existing.langs.push(item.lang);
                     } else {
-                        map.set(key, { name: item.name, number: item.number, gender: item.gender, langs: [item.lang] });
+                        map.set(key, { name: item.name, number: cleanNumber, gender: item.gender, langs: [item.lang] });
                     }
                 });
                 return Array.from(map.values());
@@ -567,9 +687,9 @@
                         if (!langSet.has(key)) langSet.set(key, { ar: l.ar, native: l.native });
                     });
                 });
+                // ترتيب أبجدي حسب اللغة العربية
                 const uniqueLangs = Array.from(langSet.values()).sort((a, b) => a.ar.localeCompare(b.ar, 'ar'));
 
-                // تحديث إحصائيات الدعاة واللغات
                 document.getElementById('totalDaees').innerText = daees.length;
                 document.getElementById('totalLangs').innerText = uniqueLangs.length;
 
@@ -581,7 +701,6 @@
                 function renderLangButtons() {
                     let html = '';
                     uniqueLangs.forEach(lang => {
-                        // البحث عن الإيموجي: أولاً بالاسم العربي، ثم بالاسم الأصلي، ثم علم أبيض
                         let emoji = languageEmoji[lang.ar] || languageEmoji[lang.native] || '🏳️';
                         html += `<div class="lang-card" data-lang-ar="${lang.ar}" data-lang-native="${lang.native}">
                             <span class="lang-emoji">${emoji}</span>
@@ -618,7 +737,12 @@
                         return;
                     }
 
-                    const translation = buttonTranslations[arLang] || buttonTranslations[nativeLang] || { male: 'تحدث معه', female: 'تحدث معها' };
+                    // الحصول على ترجمة "تحدث" من القاموس (نستخدم male كقاعدة)
+                    const translation = buttonTranslations[arLang] || buttonTranslations[nativeLang] || { male: 'Chat' };
+                    const translatedText = translation.male || 'Chat';
+
+                    // النص الثابت: "انقر للتحدث معه" بالعربية + الترجمة بين قوسين
+                    const waButtonText = `انقر للتحدث معه (${translatedText})`;
 
                     let cards = '';
                     filtered.forEach(d => {
@@ -626,7 +750,6 @@
                         const initial = d.name.charAt(0);
                         const langTags = d.langs.map(l => `<span class="lang-tag">${l.ar} · ${l.native}</span>`).join(' ');
                         const waUrl = `https://wa.me/${d.number}`;
-                        const btnText = isFemale ? (translation.female || translation.male) : translation.male;
 
                         cards += `
                             <div class="daee-card">
@@ -636,24 +759,35 @@
                                 </div>
                                 <div class="languages-list">${langTags}</div>
                                 <div class="phone-box">📞 ${d.number}</div>
-                                <a class="wa-link" href="${waUrl}" target="_blank"><i class="fab fa-whatsapp"></i> ${btnText}</a>
+                                <a class="wa-link" href="${waUrl}" target="_blank" data-preacher="${d.name}"><i class="fab fa-whatsapp"></i> ${waButtonText}</a>
                             </div>
                         `;
                     });
                     daeeContainer.innerHTML = cards;
 
+                    // تتبع نقرات الواتساب للدعاة (الاسم الكامل)
                     document.querySelectorAll('.wa-link').forEach(link => {
-                        link.addEventListener('click', function() {
-                            trackEvent('whatsapp_click', { preacher: this.closest('.daee-card').querySelector('.name').innerText.split(' ')[0] });
+                        link.addEventListener('click', function(e) {
+                            const preacherName = this.dataset.preacher; // الاسم الكامل
+                            trackEvent('whatsapp_click', { preacher: preacherName });
                         });
                     });
                 }
 
                 renderLangButtons();
 
-                // 
+                // تتبع النقرات على الأرقام العامة
+                document.getElementById('society1Link').addEventListener('click', function() {
+                    trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' });
+                });
+                document.getElementById('society2Link').addEventListener('click', function() {
+                    trackEvent('general_whatsapp_click', { society: 'جمعية شمال بيشة' });
+                });
+
+                // روابط إضافية
                 document.querySelector('.bayyinah-section a').addEventListener('click', () => trackEvent('bayyinah_click'));
-                document.querySelector('.footer-info a').addEventListener('click', () => trackEvent('source_click'));
+                document.getElementById('sourcesLink').addEventListener('click', () => trackEvent('source_click'));
+                document.getElementById('suggestionsLink').addEventListener('click', () => trackEvent('suggestions_click'));
             }
 
             init();
