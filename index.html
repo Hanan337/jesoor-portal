@@ -765,7 +765,7 @@
                     });
                     daeeContainer.innerHTML = cards;
 
-                    // تتبع نقرات الواتساب للدعاة (الاسم الكامل)
+                    //  الواتساب للدعاة (الاسم الكامل)
                     document.querySelectorAll('.wa-link').forEach(link => {
                         link.addEventListener('click', function(e) {
                             const preacherName = this.dataset.preacher; // الاسم الكامل
@@ -776,7 +776,7 @@
 
                 renderLangButtons();
 
-                // تتبع النقرات على الأرقام العامة
+                //  الأرقام العامة
                 document.getElementById('society1Link').addEventListener('click', function() {
                     trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' });
                 });
