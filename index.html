@@ -453,89 +453,94 @@
 
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
 
-            // ========== قاموس رموز الأعلام التعبيرية (شامل لجميع اللغات الموجودة في البيانات) ==========
-           const languageEmoji = {
-    'عربي': '🇸🇦',
-    'العربية': '🇸🇦',
-    'إنجليزي': '🇺🇸',  // تم التعديل هنا
-    'English': '🇺🇸',   // تم التعديل هنا
-    'إندونيسي': '🇮🇩',
-    'Bahasa Indonesia': '🇮🇩',
-    'سنهالي': '🇱🇰',
-    'සිංහල': '🇱🇰',
-    'Sinhala': '🇱🇰',
-    'بنغالي': '🇧🇩',
-    'বাংলা': '🇧🇩',
-    'Bengali': '🇧🇩',
-    'أوردو': '🇵🇰',
-    'اردو': '🇵🇰',
-    'Urdu': '🇵🇰',
-    'هندي': '🇮🇳',
-    'हिन्दी': '🇮🇳',
-    'Hindi': '🇮🇳',
-    'تيلوغو': '🇮🇳',
-    'తెలుగు': '🇮🇳',
-    'Telugu': '🇮🇳',
-    'مليباري': '🇮🇳',
-    'Malayalam': '🇮🇳',
-    'فلبيني': '🇵🇭',
-    'Tagalog': '🇵🇭',
-    'بشتو': '🇦🇫',
-    'پښتو': '🇦🇫',
-    'Pashto': '🇦🇫',
-    'إثيوبي': '🇪🇹',
-    'አማርኛ': '🇪🇹',
-    'Amharic': '🇪🇹',
-    'أورومو': '🇪🇹',
-    'Afaan Oromoo': '🇪🇹',
-    'Oromo': '🇪🇹',
-    'نيبالي': '🇳🇵',
-    'नेपाली': '🇳🇵',
-    'Nepali': '🇳🇵',
-    'فيتنامي': '🇻🇳',
-    'Tiếng Việt': '🇻🇳',
-    'Vietnamese': '🇻🇳',
-    'أوغندي': '🇺🇬',
-    'Luganda': '🇺🇬',
-    'كيني': '🇰🇪',
-    'Swahili': '🇰🇪',
-    'ملايو': '🇲🇾',
-    'Melayu': '🇲🇾',
-    'تاميلي': '🇱🇰',
-    'தமிழ்': '🇱🇰',
-    'Tamil': '🇱🇰',
-    'ميرناو': '🇵🇭',
-    'Meranau': '🇵🇭',
-    'صومالي': '🇸🇴',
-    'Somali': '🇸🇴',
-    'صيني': '🇨🇳',
-    'Chinese': '🇨🇳',
-    'بنجابي': '🇵🇰',
-    'Punjabi': '🇵🇰',
-    'فارسي': '🇮🇷',
-    'فارسی': '🇮🇷',
-    'Persian': '🇮🇷',
-    'Farsi': '🇮🇷',
-    'أوزبكي': '🇺🇿',
-    'Uzbek': '🇺🇿',
-    'فرنسي': '🇫🇷',
-    'Français': '🇫🇷',
-    'French': '🇫🇷',
-    'برتغالي': '🇵🇹',
-    'Português': '🇵🇹',
-    'Portuguese': '🇵🇹',
-    'ياباني': '🇯🇵',
-    'Japanese': '🇯🇵',
-    'هوسا': '🇳🇬',
-    'Hausa': '🇳🇬',
-    'إسباني': '🇪🇸',
-    'Spanish': '🇪🇸',
-    'ألماني': '🇩🇪',
-    'German': '🇩🇪',
-    'أسباني': '🇪🇸',
-};
+            // ========== قاموس رموز الأعلام التعبيرية (شامل لجميع اللغات) ==========
+            const languageEmoji = {
+                'عربي': '🇸🇦',
+                'العربية': '🇸🇦',
+                'إنجليزي': '🇺🇸',
+                'English': '🇺🇸',
+                'إندونيسي': '🇮🇩',
+                'Bahasa Indonesia': '🇮🇩',
+                'سنهالي': '🇱🇰',
+                'සිංහල': '🇱🇰',
+                'Sinhala': '🇱🇰',
+                'بنغالي': '🇧🇩',
+                'বাংলা': '🇧🇩',
+                'Bengali': '🇧🇩',
+                'أوردو': '🇵🇰',
+                'اردو': '🇵🇰',
+                'Urdu': '🇵🇰',
+                'هندي': '🇮🇳',
+                'हिन्दी': '🇮🇳',
+                'Hindi': '🇮🇳',
+                'تيلوغو': '🇮🇳',
+                'తెలుగు': '🇮🇳',
+                'Telugu': '🇮🇳',
+                'مليباري': '🇮🇳',
+                'Malayalam': '🇮🇳',
+                'فلبيني': '🇵🇭',
+                'Tagalog': '🇵🇭',
+                'بشتو': '🇦🇫',
+                'پښتو': '🇦🇫',
+                'Pashto': '🇦🇫',
+                'إثيوبي': '🇪🇹',
+                'አማርኛ': '🇪🇹',
+                'Amharic': '🇪🇹',
+                'أورومو': '🇪🇹',
+                'Afaan Oromoo': '🇪🇹',
+                'Oromo': '🇪🇹',
+                'نيبالي': '🇳🇵',
+                'नेपाली': '🇳🇵',
+                'Nepali': '🇳🇵',
+                'فيتنامي': '🇻🇳',
+                'Tiếng Việt': '🇻🇳',
+                'Vietnamese': '🇻🇳',
+                'أوغندي': '🇺🇬',
+                'Luganda': '🇺🇬',
+                'كيني': '🇰🇪',
+                'Swahili': '🇰🇪',
+                'ملايو': '🇲🇾',
+                'Melayu': '🇲🇾',
+                'تاميلي': '🇱🇰',
+                'தமிழ்': '🇱🇰',
+                'Tamil': '🇱🇰',
+                'ميرناو': '🇵🇭',
+                'Meranau': '🇵🇭',
+                'صومالي': '🇸🇴',
+                'Somali': '🇸🇴',
+                'صيني': '🇨🇳',
+                'Chinese': '🇨🇳',
+                'بنجابي': '🇵🇰',
+                'Punjabi': '🇵🇰',
+                'فارسي': '🇮🇷',
+                'فارسی': '🇮🇷',
+                'Persian': '🇮🇷',
+                'Farsi': '🇮🇷',
+                'أوزبكي': '🇺🇿',
+                'Uzbek': '🇺🇿',
+                'فرنسي': '🇫🇷',
+                'Français': '🇫🇷',
+                'French': '🇫🇷',
+                'برتغالي': '🇵🇹',
+                'Português': '🇵🇹',
+                'Portuguese': '🇵🇹',
+                'ياباني': '🇯🇵',
+                'Japanese': '🇯🇵',
+                'هوسا': '🇳🇬',
+                'Hausa': '🇳🇬',
+                'إسباني': '🇪🇸',
+                'Spanish': '🇪🇸',
+                'ألماني': '🇩🇪',
+                'German': '🇩🇪',
+                'أسباني': '🇪🇸',
+                // التيجريني (تجرينيا) - علمي إريتريا وإثيوبيا معاً مع مسافة للظهور بشكل منفصل
+                'تجرينيا': '🇪🇷 🇪🇹',
+                'تيجريني': '🇪🇷 🇪🇹',
+                'ትግርኛ': '🇪🇷 🇪🇹',
+                'Tigrinya': '🇪🇷 🇪🇹',
+            };
 
-            // ========== بيانات الترجمة (شاملة لكل اللغات الموجودة) ==========
+            // ========== بيانات الترجمة (شاملة لكل اللغات) ==========
             const buttonTranslations = {
                 'عربي': { male: 'تحدث', female: 'تحدثي' },
                 'العربية': { male: 'تحدث', female: 'تحدثي' },
@@ -614,7 +619,12 @@
                 'Spanish': { male: 'Chatear', female: 'Chatear' },
                 'ألماني': { male: 'Chatten', female: 'Chatten' },
                 'German': { male: 'Chatten', female: 'Chatten' },
-                'أسباني': { male: 'Chatear', female: 'Chatear' }, // تصحيح
+                'أسباني': { male: 'Chatear', female: 'Chatear' },
+                // ترجمة التيجريني (تجرينيا)
+                'تجرينيا': { male: 'ተዛረብ', female: 'ተዛረቢ' },
+                'تيجريني': { male: 'ተዛረብ', female: 'ተዛረቢ' },
+                'ትግርኛ': { male: 'ተዛረብ', female: 'ተዛረቢ' },
+                'Tigrinya': { male: 'ተዛረብ', female: 'ተዛረቢ' },
             };
 
             async function loadData() {
@@ -635,7 +645,7 @@
                         daeesRaw.push({
                             name: obj.name,
                             number: obj.number,
-                            gender: obj.gender || 'male', // افتراضي إذا لم يوجد
+                            gender: obj.gender || 'male',
                             lang: { ar: obj.language_ar, native: obj.language_native }
                         });
                     }
@@ -649,9 +659,7 @@
             function mergeDaees(rawList) {
                 const map = new Map();
                 rawList.forEach(item => {
-                    // تنظيف الرقم: إزالة أي مسافات أو رموز غير رقمية
                     let cleanNumber = item.number.replace(/\D/g, '');
-                    // التأكد من وجود مفتاح الدولة 966 إذا لم يكن موجوداً
                     if (!cleanNumber.startsWith('966')) {
                         if (cleanNumber.startsWith('0')) {
                             cleanNumber = '966' + cleanNumber.substring(1);
@@ -687,7 +695,6 @@
                         if (!langSet.has(key)) langSet.set(key, { ar: l.ar, native: l.native });
                     });
                 });
-                // ترتيب أبجدي حسب اللغة العربية
                 const uniqueLangs = Array.from(langSet.values()).sort((a, b) => a.ar.localeCompare(b.ar, 'ar'));
 
                 document.getElementById('totalDaees').innerText = daees.length;
@@ -737,11 +744,8 @@
                         return;
                     }
 
-                    // الحصول على ترجمة "تحدث" من القاموس (نستخدم male كقاعدة)
                     const translation = buttonTranslations[arLang] || buttonTranslations[nativeLang] || { male: 'Chat' };
                     const translatedText = translation.male || 'Chat';
-
-                    // النص الثابت: "انقر للتحدث معه" بالعربية + الترجمة بين قوسين
                     const waButtonText = `انقر للتحدث معه (${translatedText})`;
 
                     let cards = '';
@@ -765,10 +769,9 @@
                     });
                     daeeContainer.innerHTML = cards;
 
-                    //  الواتساب للدعاة (الاسم الكامل)
                     document.querySelectorAll('.wa-link').forEach(link => {
                         link.addEventListener('click', function(e) {
-                            const preacherName = this.dataset.preacher; // الاسم الكامل
+                            const preacherName = this.dataset.preacher;
                             trackEvent('whatsapp_click', { preacher: preacherName });
                         });
                     });
@@ -776,7 +779,6 @@
 
                 renderLangButtons();
 
-                //  الأرقام العامة
                 document.getElementById('society1Link').addEventListener('click', function() {
                     trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' });
                 });
@@ -784,7 +786,6 @@
                     trackEvent('general_whatsapp_click', { society: 'جمعية شمال بيشة' });
                 });
 
-                // روابط إضافية
                 document.querySelector('.bayyinah-section a').addEventListener('click', () => trackEvent('bayyinah_click'));
                 document.getElementById('sourcesLink').addEventListener('click', () => trackEvent('source_click'));
                 document.getElementById('suggestionsLink').addEventListener('click', () => trackEvent('suggestions_click'));
