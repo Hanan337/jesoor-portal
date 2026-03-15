@@ -24,48 +24,46 @@
             display: flex; justify-content: center;
         }
         .container { max-width: 1300px; width: 100%; }
+
+        /* الآية */
         .verse-container {
-            text-align: center; margin-bottom: 2rem; padding: 1.5rem;
+            text-align: center; margin-bottom: 70px; padding: 1.2rem;
             background: linear-gradient(135deg, #e7f5ef, #d4ece2);
             border-radius: 60px; border: 2px solid #b6dfd0;
         }
         .verse-ar {
-            font-family: 'Amiri', serif; font-size: 2.2rem; font-weight: 700;
+            font-family: 'Amiri', serif; font-size: 2rem; font-weight: 700;
             color: #0f4e3f; margin-bottom: 0.5rem;
         }
         .verse-en {
-            font-size: 1.1rem;
-            color: #2b6b56;
-            font-style: italic;
-            border-top: 1px solid #9bc9b8;
-            padding-top: 0.8rem;
-            display: inline-block;
-            max-width: 90%;
-            margin: 0 auto;
+            font-size: 1rem; color: #2b6b56; font-style: italic;
+            border-top: 1px solid #9bc9b8; padding-top: 0.6rem;
+            display: inline-block; max-width: 90%; margin: 0 auto;
         }
-        .header { text-align: center; margin-bottom: 2rem; }
-        .main-title {
-            font-size: 2.4rem;
-            font-weight: 800;
+
+        /* العنوان الرئيسي (النص المحدث) */
+        .hero-title {
+            text-align: center;
+            margin: 0 0 50px 0;
+        }
+        .hero-title .main-title {
+            font-size: 2.2rem;
+            font-weight: 700;
             color: #174339;
-            margin: 0.5rem 0 0.2rem;
-            background: rgba(255,255,255,0.5);
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
-            display: inline-block;
-            line-height: 1.4;
+            line-height: 1.3;
         }
-        .main-title-en {
-            font-size: 1.5rem;
-            color: #2f6b5c;
+        .hero-title .sub-title {
+            font-size: 1.3rem;
             font-weight: 500;
-            margin-bottom: 1rem;
+            color: #2f6b5c;
             font-style: italic;
+            margin-top: 0.3rem;
         }
         .update-date {
-            background: #e6f4ee; padding: 0.5rem 2rem; border-radius: 40px;
-            display: inline-block; margin: 0.5rem auto; font-weight: 600;
-            border-right: 5px solid #12805c;
+            background: #e6f4ee; padding: 0.3rem 1.5rem; border-radius: 40px;
+            display: inline-block; margin: 0.5rem auto 0; font-weight: 500;
+            border-right: 4px solid #12805c;
+            font-size: 0.8rem;
         }
 
         /* شريط الإحصائيات */
@@ -73,101 +71,133 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin: 1rem auto 2rem;
-            padding: 0.8rem 1.5rem;
+            margin: 1rem auto 1.5rem;
+            padding: 0.5rem 1.2rem;
             background: white;
             border-radius: 60px;
             border: 2px solid #c0e4d6;
             box-shadow: 0 4px 8px rgba(0,40,20,0.1);
-            max-width: 400px;
-            font-size: 1.2rem;
+            max-width: 350px;
+            font-size: 1rem;
             font-weight: 600;
         }
         .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #11614a;
+            display: flex; align-items: center; gap: 6px; color: #11614a;
         }
-        .stat-item i {
-            color: #12805c;
-            font-size: 1.4rem;
-        }
+        .stat-item i { color: #12805c; font-size: 1.2rem; }
 
+        /* أزرار اللغات */
         .languages-grid {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;
-            margin: 2rem 0;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem;
+            margin: 1.5rem 0 1rem;
         }
         .lang-card {
             background: white; border: 2px solid #c0e4d6; border-radius: 50px;
-            padding: 0.8rem 2rem;
-            font-size: 1.4rem;
+            padding: 0.6rem 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600; color: #11614a;
             cursor: pointer; transition: 0.2s; box-shadow: 0 4px 8px rgba(0,40,20,0.1);
-            display: inline-flex; align-items: center; gap: 8px;
+            display: inline-flex; align-items: center; gap: 6px;
         }
-        .lang-card i { color: #25a36b; font-size: 1.6rem; }
+        .lang-card i { color: #25a36b; font-size: 1.3rem; }
         .lang-card.active { background: #1b6d56; border-color: #1b6d56; color: white; }
         .lang-card.active i { color: white; }
-        .lang-card .native-lang { font-size: 1.1rem; }
-        .lang-emoji {
+        .lang-card .native-lang { font-size: 0.9rem; }
+        .lang-emoji { font-size: 1.3rem; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); }
+
+        /* الموسوعة الخاصة (الزر الذكي) - مخفي افتراضياً */
+        .discover-more-section {
+            text-align: center;
+            display: none;
+        }
+        .discover-more-section.visible {
+            display: block;
+            margin: 30px auto;
+        }
+        .discover-more-section a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #2e7d32;
+            padding: 12px 22px;
+            border-radius: 12px;
+            border: 1px solid #a5d6a7;
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            line-height: 1.4;
+        }
+        .discover-more-section a:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .discover-more-section a i {
             font-size: 1.6rem;
-            line-height: 1;
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+            color: #f9a825;
         }
+
+        /* عداد الدعاة */
         .counter-badge {
-            background: #daf2e8; padding: 0.6rem 2rem; border-radius: 40px;
-            width: fit-content; margin: 1rem auto; font-weight: 700;
-            border-right: 6px solid #12805c;
+            background: #daf2e8; padding: 0.4rem 1.8rem; border-radius: 40px;
+            width: fit-content; margin: 0.5rem auto; font-weight: 600;
+            border-right: 5px solid #12805c;
+            font-size: 0.95rem;
         }
+
+        /* شبكة الدعاة */
         .daee-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem; margin: 2rem 0;
+            gap: 1.5rem; margin: 1.5rem 0;
         }
         .daee-card {
-            background: white; border-radius: 32px; padding: 1.8rem;
-            box-shadow: 0 10px 20px rgba(0,50,20,0.1); border: 1px solid #d0eee3;
+            background: white; border-radius: 32px; padding: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0,50,20,0.1); border: 1px solid #d0eee3;
             transition: 0.2s;
         }
-        .daee-card:hover { transform: translateY(-5px); box-shadow: 0 15px 25px -8px #0f5e48; }
-        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
+        .daee-card:hover { transform: translateY(-5px); box-shadow: 0 12px 22px -8px #0f5e48; }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.8rem; }
         .avatar {
-            width: 60px; height: 60px; background: linear-gradient(145deg, #1d886b, #116b51);
+            width: 55px; height: 55px; background: linear-gradient(145deg, #1d886b, #116b51);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 2rem; font-weight: 700;
+            color: white; font-size: 1.8rem; font-weight: 700;
         }
         .female-avatar { background: linear-gradient(145deg, #b0678f, #914672); }
-        .name { font-size: 1.7rem; font-weight: 700; color: #094734; }
+        .name { font-size: 1.5rem; font-weight: 700; color: #094734; }
         .languages-list {
             display: flex; flex-wrap: wrap; gap: 0.5rem; background: #effbf5;
-            padding: 0.8rem; border-radius: 30px; margin: 0.8rem 0;
+            padding: 0.7rem; border-radius: 30px; margin: 0.7rem 0;
         }
         .lang-tag {
-            background: #c1eadc; padding: 0.2rem 1rem; border-radius: 30px;
-            color: #004d33; font-weight: 600; font-size: 0.9rem;
+            background: #c1eadc; padding: 0.2rem 0.9rem; border-radius: 30px;
+            color: #004d33; font-weight: 600; font-size: 0.85rem;
         }
         .phone-box {
             direction: ltr; text-align: left; background: #ecf9f2;
-            padding: 0.6rem 1rem; border-radius: 40px; font-family: monospace;
-            font-size: 1.2rem; margin: 0.8rem 0; border: 1px dashed #3aa17e;
+            padding: 0.5rem 0.9rem; border-radius: 40px; font-family: monospace;
+            font-size: 1.1rem; margin: 0.7rem 0; border: 1px dashed #3aa17e;
         }
         .wa-link {
             background: #25D366; color: white; border-radius: 60px;
-            padding: 0.8rem 0.5rem;
-            font-weight: 700; text-decoration: none;
+            padding: 0.7rem 0.5rem;
+            font-weight: 600; text-decoration: none;
             display: flex; align-items: center; justify-content: center; gap: 8px;
             transition: 0.2s;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-align: center;
             white-space: normal;
             word-break: keep-all;
-            line-height: 1.4;
-            min-height: 60px;
+            line-height: 1.3;
+            min-height: 55px;
         }
-        .wa-link i { font-size: 1.6rem; flex-shrink: 0; }
+        .wa-link i { font-size: 1.4rem; flex-shrink: 0; }
         .wa-link:hover { background: #128C7E; }
 
-        /* قسم أرقام التواصل العامة */
+        /* أرقام التواصل العامة */
         .contact-number {
             margin: 2rem auto;
             padding: 1.2rem 1.5rem;
@@ -228,80 +258,35 @@
             margin-top: 0.4rem;
             font-style: italic;
         }
-        /* قسم بيان الإسلام */
-        .bayyinah-section {
-            margin: 2rem auto;
-            padding: 1.5rem 1rem;
-            background: #e0f2ea;
-            border-radius: 50px;
-            text-align: center;
-            border: 1px solid #a3cfc0;
-            max-width: 900px;
-        }
-        .bayyinah-section a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #1d6e58;
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 40px;
-            font-size: 1.4rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.2s;
-            border: 1px solid #0f5c46;
-            box-shadow: 0 4px 8px rgba(0,60,30,0.15);
-            flex-wrap: wrap;
-        }
-        .bayyinah-section a:hover {
-            background: #0b5d45;
-            transform: scale(1.01);
-        }
-        .bayyinah-section a i {
-            font-size: 1.4rem;
-        }
-        .bayyinah-note {
-            margin-top: 0.8rem;
-            color: #1c6a53;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        .bayyinah-note-en {
-            font-size: 0.9rem;
-            color: #3d6e5c;
-            margin-top: 0.2rem;
-            font-style: italic;
-        }
+
         /* تذييل المعلومات */
         .footer-info {
-            margin-top: 2.5rem;
-            padding: 1.5rem;
+            margin-top: 2rem;
+            padding: 1rem 1.2rem;
             background: #e9f5ef;
             border-radius: 40px;
             border: 1px solid #b8dfd0;
         }
         .footer-info h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #0f4e3f;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             border-right: 4px solid #12805c;
             padding-right: 0.8rem;
         }
         .footer-info p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #246b58;
-            line-height: 1.7;
-            margin-bottom: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
         }
         .footer-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
             align-items: center;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
         }
         .footer-info a {
             color: #0f4e3f;
@@ -311,7 +296,7 @@
             align-items: center;
             gap: 5px;
             background: #e6f4ee;
-            padding: 0.4rem 1.2rem;
+            padding: 0.3rem 1rem;
             border-radius: 40px;
             margin: 0;
             border: 1px solid #b8dfd0;
@@ -320,15 +305,104 @@
             background: #d2eadf;
         }
         .footer-info i {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #12805c;
         }
         .footer-info hr {
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             border: 1px dashed #b6d9cf;
         }
-        .no-daees { text-align: center; padding: 3rem; background: #f1fcf6; border-radius: 50px; }
-        .loading { text-align: center; font-size: 1.5rem; padding: 3rem; }
+        .footer-info .text-link {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #ac8e5a;
+            text-decoration: underline;
+            display: inline;
+        }
+        .footer-info .text-link:hover {
+            background: none;
+            color: #8e6b3c;
+        }
+
+        /* تحسينات الجوال */
+        @media (max-width: 768px) {
+            .verse-container {
+                margin-bottom: 35px;
+            }
+            .hero-title .main-title {
+                font-size: 1.5rem;
+            }
+            .hero-title .sub-title {
+                font-size: 1rem;
+            }
+            .hero-title {
+                margin-bottom: 25px;
+            }
+            .stats-bar {
+                margin: 0.5rem auto 0.8rem;
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+            .languages-grid {
+                margin: 1rem 0 0.5rem;
+                gap: 0.5rem;
+            }
+            .lang-card {
+                padding: 0.4rem 1rem;
+                font-size: 1rem;
+            }
+            .lang-card i {
+                font-size: 1.1rem;
+            }
+            .discover-more-section.visible {
+                margin: 20px auto;
+            }
+            .discover-more-section a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            .counter-badge {
+                margin: 0.3rem auto;
+                padding: 0.3rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .daee-grid {
+                margin: 1rem 0;
+                gap: 1rem;
+            }
+            .contact-number {
+                margin: 1rem auto;
+                padding: 1rem;
+            }
+            .contact-title {
+                font-size: 1rem;
+            }
+            .contact-number a {
+                font-size: 0.9rem;
+                padding: 0.2rem 0.8rem;
+            }
+            .footer-info {
+                margin-top: 1rem;
+                padding: 0.8rem;
+            }
+            .footer-info h3 {
+                font-size: 1rem;
+            }
+            .footer-info p {
+                font-size: 0.8rem;
+            }
+            .footer-links {
+                gap: 0.5rem;
+            }
+            .footer-info a {
+                padding: 0.2rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        .no-daees { text-align: center; padding: 2rem; background: #f1fcf6; border-radius: 50px; }
+        .loading { text-align: center; font-size: 1.3rem; padding: 2rem; }
     </style>
 </head>
 <body>
@@ -339,32 +413,31 @@
             <div class="verse-en">“And We have not sent you, [O Muhammad], except as a mercy to the worlds.”</div>
         </div>
 
-        <!-- العنوان الرئيسي -->
-        <div class="header">
-            <h1 class="main-title">هل لديك أي تساؤلات؟ تواصل معنا بلغتك</h1>
-            <div class="main-title-en">Have questions?? Contact us in your language.</div>
+        <!-- العنوان الرئيسي (النص المحدث) -->
+        <div class="hero-title">
+            <div class="main-title">تواصل مباشر بلغتكم</div>
+            <div class="sub-title">Direct contact in your language</div>
             <div class="update-date">آخر تحديث: 1447هـ / 2026م</div>
         </div>
 
         <!-- شريط الإحصائيات -->
         <div class="stats-bar">
-            <div class="stat-item">
-                <i class="fas fa-users"></i>
-                <span id="totalDaees">0</span> داعية
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-language"></i>
-                <span id="totalLangs">0</span> لغة
-            </div>
+            <div class="stat-item"><i class="fas fa-users"></i><span id="totalDaees">0</span> داعية</div>
+            <div class="stat-item"><i class="fas fa-language"></i><span id="totalLangs">0</span> لغة</div>
         </div>
 
         <!-- أزرار اللغات -->
         <div id="languagesGrid" class="languages-grid"></div>
 
-        <!-- عداد الدعاة -->
-        <div class="counter-badge"><i class="fas fa-users"></i> <span id="daeeCount">0</span> داعية متاح</div>
+        <!-- الزر الذكي (يظهر فقط بعد اختيار اللغة) -->
+        <div id="discoverSection" class="discover-more-section">
+            <a id="discoverMoreLink" href="https://byenah.com/ar/discover-islam" target="_blank">
+                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">اكتشف المزيد عن الإسلام بلغتك</span>
+            </a>
+        </div>
 
-        <!-- شبكة الدعاة -->
+        <!-- عداد الدعاة + شبكة الدعاة -->
+        <div class="counter-badge"><i class="fas fa-users"></i> <span id="daeeCount">0</span> داعية متاح</div>
         <div id="daeeGridContainer" class="daee-grid"><div class="loading">جاري تحميل البيانات...</div></div>
 
         <!-- أرقام التواصل العامة -->
@@ -381,24 +454,10 @@
             <div class="contact-instruction">(أرسل الاسم والجنسية لأي من هذه الأرقام)</div>
         </div>
 
-        <!-- بيان الإسلام -->
-        <div class="bayyinah-section">
-            <a href="https://byenah.com/ar" target="_blank">
-                <i class="fas fa-book-open"></i> موسوعة بيان الإسلام | Bayan Al-Islam Encyclopedia
-                <span style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.9rem;">120+</span>
-            </a>
-            <div class="bayyinah-note">
-                مواد منتقاه للتعريف بالإسلام وتعليمه باللغات بأكثر من (120) لغة
-            </div>
-            <div class="bayyinah-note-en">
-                Selected materials to introduce and teach Islam in more than 120 languages
-            </div>
-        </div>
-
         <!-- تذييل المعلومات -->
         <div class="footer-info">
             <h3>📚 المصادر والاقتراحات</h3>
-            <p>تم جمع جهات التواصل من جمعيات ومراكز إسلامية عديدة لتسهيل الوصول إليها. يمكنكم الاطلاع على قائمة المصادر، كما نرحب باقتراحاتكم لتطوير الدليل:</p>
+            <p>تم جمع جهات التواصل من منشورات جمعيات ومراكز إسلامية عديدة لتسهيل الوصول إليها. يمكنكم الاطلاع على قائمة المصادر، كما نرحب باقتراحاتكم لتطوير الدليل:</p>
             <div class="footer-links">
                 <a href="https://drive.google.com/drive/folders/1HbNGrY-KabCGFULXxim5dDai2-ljVSTI?usp=sharing" target="_blank" id="sourcesLink">
                     <i class="fas fa-folder-open"></i> المصادر
@@ -409,13 +468,13 @@
             </div>
             <hr>
             <h3>🌐 إضافات إثرائية</h3>
-            <p>للمزيد من الفائدة العلمية والشرعية، قمنا بإضافة "موسوعة بيان الإسلام" كمرجع موصى به؛ فهي تحتوي على مواد منتقاة للتعريف بالإسلام وتعليمه باللغات، تتضمن مواد مرئية ومقروءة ومسموعة، لبيان حقيقة الإسلام ولتعليم المسلم ما يحتاجه لإقامة دينه. وتعد أحد مشاريع جمعية خدمة المحتوى الإسلامي باللغات.</p>
+            <p>للمزيد من الفائدة العلمية والشرعية، قمنا بإضافة <a href="https://byenah.com/ar" target="_blank" class="text-link">موسوعة بيان الإسلام</a> كمرجع موصى به؛ فهي تحتوي على مواد منتقاة للتعريف بالإسلام وتعليمه باللغات، تتضمن مواد مرئية ومقروءة ومسموعة، لبيان حقيقة الإسلام ولتعليم المسلم ما يحتاجه لإقامة دينه. وتعد أحد مشاريع جمعية خدمة المحتوى الإسلامي باللغات.</p>
         </div>
     </div>
 
     <script>
         (function() {
-            // ========== إعداد Firebase ==========
+            // إعدادات Firebase
             const firebaseConfig = {
                 apiKey: "AIzaSyBW-jt-wArS4Uy0mirm8wADDc2iz-GVXWQ",
                 authDomain: "joso-rahama.firebaseapp.com",
@@ -425,7 +484,6 @@
                 messagingSenderId: "17002358185",
                 appId: "1:17002358185:web:44618bde214fcfc80450b8"
             };
-
             firebase.initializeApp(firebaseConfig);
             const appCheck = firebase.appCheck();
             appCheck.activate('6LeJCIEsAAAAAExU4C8WxOHOOeUwdousTMteEfbfF');
@@ -433,27 +491,20 @@
 
             function trackEvent(eventName, eventData = {}) {
                 const eventsRef = database.ref('events').push();
-                eventsRef.set({
-                    event: eventName,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    ...eventData
-                }).catch(error => console.warn('خطأ في تسجيل الحدث:', error));
-                
+                eventsRef.set({ event: eventName, timestamp: firebase.database.ServerValue.TIMESTAMP, ...eventData })
+                    .catch(error => console.warn('خطأ في تسجيل الحدث:', error));
                 const counterRef = database.ref('counters/' + eventName);
                 counterRef.transaction(current => (current || 0) + 1);
-
                 if (eventName === 'language_select' && eventData.language_arabic) {
                     const langKey = 'language_' + eventData.language_arabic;
-                    const langCounterRef = database.ref('language_counts/' + langKey);
-                    langCounterRef.transaction(current => (current || 0) + 1);
+                    database.ref('language_counts/' + langKey).transaction(current => (current || 0) + 1);
                 }
             }
-
             trackEvent('page_view');
 
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjwHKYbVVTxBTqKFZOq6UNN-YJS_qrDoIoxCuMQ5SqVX9LjT4CmL-TgHPlDqTDlR7eTcpRlHkZjl4o/pub?output=csv';
 
-            // ========== قاموس رموز الأعلام التعبيرية (شامل لجميع اللغات) ==========
+            // ========== قاموس رموز الأعلام التعبيرية ==========
             const languageEmoji = {
                 'عربي': '🇸🇦',
                 'العربية': '🇸🇦',
@@ -533,14 +584,17 @@
                 'ألماني': '🇩🇪',
                 'German': '🇩🇪',
                 'أسباني': '🇪🇸',
-                // التيجريني (تجرينيا) - علمي إريتريا وإثيوبيا معاً مع مسافة للظهور بشكل منفصل
                 'تجرينيا': '🇪🇷 🇪🇹',
                 'تيجريني': '🇪🇷 🇪🇹',
                 'ትግርኛ': '🇪🇷 🇪🇹',
                 'Tigrinya': '🇪🇷 🇪🇹',
+                'بورمي': '🇲🇲',
+                'မြန်မာ': '🇲🇲',
+                'Burmese': '🇲🇲',
+                'ميانمار': '🇲🇲',
             };
 
-            // ========== بيانات الترجمة (شاملة لكل اللغات) ==========
+            // ========== بيانات الترجمة للأزرار ==========
             const buttonTranslations = {
                 'عربي': { male: 'تحدث', female: 'تحدثي' },
                 'العربية': { male: 'تحدث', female: 'تحدثي' },
@@ -620,12 +674,79 @@
                 'ألماني': { male: 'Chatten', female: 'Chatten' },
                 'German': { male: 'Chatten', female: 'Chatten' },
                 'أسباني': { male: 'Chatear', female: 'Chatear' },
-                // ترجمة التيجريني (تجرينيا)
                 'تجرينيا': { male: 'ተዛረብ', female: 'ተዛረቢ' },
                 'تيجريني': { male: 'ተዛረብ', female: 'ተዛረቢ' },
                 'ትግርኛ': { male: 'ተዛረብ', female: 'ተዛረቢ' },
                 'Tigrinya': { male: 'ተዛረብ', female: 'ተዛረቢ' },
+                'بورمي': { male: 'စကားပြောရန်', female: 'စကားပြောရန်' },
+                'မြန်မာ': { male: 'စကားပြောရန်', female: 'စကားပြောရန်' },
+                'Burmese': { male: 'စကားပြောရန်', female: 'စကားပြောရန်' },
+                'ميانمار': { male: 'စကားပြောရန်', female: 'စကားပြောရန်' },
             };
+
+            // ========== قاموس تحويل أسماء اللغات العربية إلى رموز بيان الإسلام ==========
+            const bayyinahLangMap = {
+                'عربي': 'ar','العربية': 'ar','إنجليزي': 'en','English': 'en','إندونيسي': 'id','Bahasa Indonesia': 'id',
+                'أوردو': 'ur','اردو': 'ur','هندي': 'hi','हिन्दी': 'hi','بنغالي': 'bn','বাংলা': 'bn',
+                'فلبيني': 'fil','Tagalog': 'fil','سنهالي': 'si','සිංහල': 'si','تيلوغو': 'te','తెలుగు': 'te',
+                'مليباري': 'ml','Malayalam': 'ml','بشتو': 'ps','پښتو': 'ps','إثيوبي': 'am','አማርኛ': 'am',
+                'أورومو': 'om','Afaan Oromoo': 'om','نيبالي': 'ne','नेपाली': 'ne','فيتنامي': 'vi','Tiếng Việt': 'vi',
+                'أوغندي': 'lg','Luganda': 'lg','كيني': 'sw','Swahili': 'sw','ملايو': 'ms','Melayu': 'ms',
+                'تاميلي': 'ta','தமிழ்': 'ta','ميرناو': 'fil','Meranau': 'fil','صومالي': 'so','Somali': 'so',
+                'صيني': 'zh','Chinese': 'zh','بنجابي': 'pa','Punjabi': 'pa','فارسي': 'fa','فارسی': 'fa',
+                'أوزبكي': 'uz','Uzbek': 'uz','فرنسي': 'fr','Français': 'fr','برتغالي': 'pt','Português': 'pt',
+                'ياباني': 'ja','Japanese': 'ja','هوسا': 'ha','Hausa': 'ha','إسباني': 'es','Spanish': 'es',
+                'ألماني': 'de','German': 'de','أسباني': 'es','تجرينيا': 'ti','تيجريني': 'ti','ትግርኛ': 'ti','Tigrinya': 'ti',
+                'بورمي': 'my',
+                'မြန်မာ': 'my',
+                'Burmese': 'my',
+                'ميانمار': 'my',
+            };
+
+            // ========== قاموس ترجمة "اكتشف المزيد عن الإسلام بلغتك" ==========
+            const discoverTranslations = {
+                'ar': 'اكتشف المزيد عن الإسلام بلغتك',
+                'en': 'Discover more about Islam in your language',
+                'id': 'Temukan lebih banyak tentang Islam dalam bahasa Anda',
+                'ur': 'اپنی زبان میں اسلام کے بارے میں مزید دریافت کریں',
+                'hi': 'अपनी भाषा में इस्लाम के बारे में और जानें',
+                'bn': 'আপনার ভাষায় ইসলাম সম্পর্কে আরও আবিষ্কার করুন',
+                'fil': 'Tuklasin ang higit pa tungkol sa Islam sa iyong wika',
+                'si': 'ඔබේ භාෂාවෙන් ඉස්ලාම් ගැන තවත් සොයා ගන්න',
+                'te': 'మీ భాషలో ఇస్లాం గురించి మరింత తెలుసుకోండి',
+                'ml': 'നിങ്ങളുടെ ഭാഷയിൽ ഇസ്ലാമിനെക്കുറിച്ച് കൂടുതൽ കണ്ടെത്തുക',
+                'ps': 'په خپله ژبه کې د اسلام په اړه نور معلومات ترلاسه کړئ',
+                'am': 'በቋንቋዎ ስለ እስልምና ተጨማሪ ይወቁ',
+                'om': 'Afaan keessaniitti waa’ee Islaam dabalataan baruuf',
+                'ne': 'आफ्नो भाषामा इस्लामको बारेमा थप जान्नुहोस्',
+                'vi': 'Khám phá thêm về Islam bằng ngôn ngữ của bạn',
+                'lg': 'Nonya ebisinga ku Islam mu lulimi lwo',
+                'sw': 'Gundua zaidi kuhusu Uislamu kwa lugha yako',
+                'ms': 'Terokai lebih lanjut tentang Islam dalam bahasa anda',
+                'ta': 'உங்கள் மொழியில் இஸ்லாத்தைப் பற்றி மேலும் அறிக',
+                'so': 'Ka baro wax badan oo ku saabsan Islaamka luqaddaada',
+                'zh': '用您的语言发现更多关于伊斯兰教的信息',
+                'pa': 'ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਇਸਲਾਮ ਬਾਰੇ ਹੋਰ ਖੋਜੋ',
+                'fa': 'درباره اسلام به زبان خود بیشتر بدانید',
+                'uz': 'Islom haqida oʻz tilingizda koʻproq bilib oling',
+                'fr': 'Découvrez-en plus sur l\'islam dans votre langue',
+                'pt': 'Descubra mais sobre o Islã no seu idioma',
+                'ja': 'あなたの言語でイスラム教についてもっと知る',
+                'ha': 'Gano ƙarin game da Musulunci a cikin yaren ku',
+                'es': 'Descubre más sobre el Islam en tu idioma',
+                'de': 'Entdecken Sie mehr über den Islam in Ihrer Sprache',
+                'ti': 'ብቋንቋኻ ብዛዕባ እስልምና ተወሳኺ ፍለጥ',
+                'my': 'မြန်မာဘာသာဖြင့် အစ္စလာမ်အကြောင်း ပိုမိုရှာဖွေပါ',
+            };
+
+            function updateDiscoverLink(arLang) {
+                const discoverLink = document.getElementById('discoverMoreLink');
+                const discoverSpan = document.getElementById('discoverMoreText');
+                if (!discoverLink || !discoverSpan) return;
+                const langCode = bayyinahLangMap[arLang] || 'ar';
+                discoverLink.href = `https://byenah.com/${langCode}/discover-islam`;
+                discoverSpan.innerText = discoverTranslations[langCode] || discoverTranslations['ar'];
+            }
 
             async function loadData() {
                 try {
@@ -633,21 +754,13 @@
                     const csvText = await response.text();
                     const rows = csvText.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"|"$/g, '')));
                     const headers = rows[0];
-                    
                     const daeesRaw = [];
                     for (let i = 1; i < rows.length; i++) {
                         const row = rows[i];
                         if (row.length < 5) continue;
                         const obj = {};
-                        headers.forEach((header, index) => {
-                            obj[header] = row[index] || '';
-                        });
-                        daeesRaw.push({
-                            name: obj.name,
-                            number: obj.number,
-                            gender: obj.gender || 'male',
-                            lang: { ar: obj.language_ar, native: obj.language_native }
-                        });
+                        headers.forEach((header, index) => { obj[header] = row[index] || ''; });
+                        daeesRaw.push({ name: obj.name, number: obj.number, gender: obj.gender || 'male', lang: { ar: obj.language_ar, native: obj.language_native } });
                     }
                     return daeesRaw;
                 } catch (error) {
@@ -661,11 +774,7 @@
                 rawList.forEach(item => {
                     let cleanNumber = item.number.replace(/\D/g, '');
                     if (!cleanNumber.startsWith('966')) {
-                        if (cleanNumber.startsWith('0')) {
-                            cleanNumber = '966' + cleanNumber.substring(1);
-                        } else {
-                            cleanNumber = '966' + cleanNumber;
-                        }
+                        cleanNumber = cleanNumber.startsWith('0') ? '966' + cleanNumber.substring(1) : '966' + cleanNumber;
                     }
                     const key = `${cleanNumber}_${item.name}`;
                     if (map.has(key)) {
@@ -687,14 +796,11 @@
                 }
 
                 const daees = mergeDaees(rawData);
-
                 const langSet = new Map();
-                daees.forEach(d => {
-                    d.langs.forEach(l => {
-                        const key = `${l.ar}|${l.native}`;
-                        if (!langSet.has(key)) langSet.set(key, { ar: l.ar, native: l.native });
-                    });
-                });
+                daees.forEach(d => d.langs.forEach(l => {
+                    const key = `${l.ar}|${l.native}`;
+                    if (!langSet.has(key)) langSet.set(key, { ar: l.ar, native: l.native });
+                }));
                 const uniqueLangs = Array.from(langSet.values()).sort((a, b) => a.ar.localeCompare(b.ar, 'ar'));
 
                 document.getElementById('totalDaees').innerText = daees.length;
@@ -726,13 +832,23 @@
                             trackEvent('language_select', { language_arabic: arLang, language_native: nativeLang });
                             
                             filterByLang(arLang, nativeLang);
+                            updateDiscoverLink(arLang);
+
+                            const discoverSection = document.getElementById('discoverSection');
+                            if (!discoverSection.classList.contains('visible')) {
+                                discoverSection.classList.add('visible');
+                            }
                         });
                     });
 
                     if (uniqueLangs.length > 0) {
                         const first = uniqueLangs[0];
                         const firstBtn = document.querySelector(`.lang-card[data-lang-ar="${first.ar}"]`);
-                        if (firstBtn) { firstBtn.classList.add('active'); filterByLang(first.ar, first.native); }
+                        if (firstBtn) { 
+                            firstBtn.classList.add('active'); 
+                            filterByLang(first.ar, first.native); 
+                            updateDiscoverLink(first.ar);
+                        }
                     }
                 }
 
@@ -743,7 +859,6 @@
                         daeeContainer.innerHTML = '<div class="no-daees">لا يوجد دعاة متاحون لهذه اللغة حالياً</div>';
                         return;
                     }
-
                     const translation = buttonTranslations[arLang] || buttonTranslations[nativeLang] || { male: 'Chat' };
                     const translatedText = translation.male || 'Chat';
                     const waButtonText = `انقر للتحدث معه (${translatedText})`;
@@ -768,7 +883,6 @@
                         `;
                     });
                     daeeContainer.innerHTML = cards;
-
                     document.querySelectorAll('.wa-link').forEach(link => {
                         link.addEventListener('click', function(e) {
                             const preacherName = this.dataset.preacher;
@@ -779,14 +893,9 @@
 
                 renderLangButtons();
 
-                document.getElementById('society1Link').addEventListener('click', function() {
-                    trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' });
-                });
-                document.getElementById('society2Link').addEventListener('click', function() {
-                    trackEvent('general_whatsapp_click', { society: 'جمعية شمال بيشة' });
-                });
-
-                document.querySelector('.bayyinah-section a').addEventListener('click', () => trackEvent('bayyinah_click'));
+                document.getElementById('discoverMoreLink').addEventListener('click', () => trackEvent('discover_more_click'));
+                document.getElementById('society1Link').addEventListener('click', () => trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' }));
+                document.getElementById('society2Link').addEventListener('click', () => trackEvent('general_whatsapp_click', { society: 'جمعية شمال بيشة' }));
                 document.getElementById('sourcesLink').addEventListener('click', () => trackEvent('source_click'));
                 document.getElementById('suggestionsLink').addEventListener('click', () => trackEvent('suggestions_click'));
             }
