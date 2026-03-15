@@ -105,13 +105,9 @@
         .lang-card .native-lang { font-size: 0.9rem; }
         .lang-emoji { font-size: 1.3rem; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); }
 
-        /* الموسوعة الخاصة (الزر الذكي) - مخفي افتراضياً */
+        /* الموسوعة الخاصة (الزر الذكي) - ظاهر دائمًا الآن */
         .discover-more-section {
             text-align: center;
-            display: none;
-        }
-        .discover-more-section.visible {
-            display: block;
             margin: 30px auto;
         }
         .discover-more-section a {
@@ -327,32 +323,6 @@
 
         .no-daees { text-align: center; padding: 2rem; background: #f1fcf6; border-radius: 50px; }
         .loading { text-align: center; font-size: 1.3rem; padding: 2rem; }
-
-        /* تحسين عرض الجوال: كل صف يحتوي على زرين بحجم أكبر */
-        @media (max-width: 640px) {
-            .languages-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.6rem;
-                width: 100%;
-            }
-            .lang-card {
-                width: 100%;
-                padding: 0.9rem 0.3rem;
-                font-size: 1.2rem;
-                justify-content: center;
-                white-space: normal;
-                text-align: center;
-                margin: 0;
-            }
-            .lang-card i {
-                font-size: 1.3rem;
-            }
-            .lang-card .native-lang {
-                font-size: 0.9rem;
-                display: block; /* يجعله ينزل لسطر جديد إذا لزم */
-            }
-        }
     </style>
 </head>
 <body>
@@ -379,10 +349,10 @@
         <!-- أزرار اللغات -->
         <div id="languagesGrid" class="languages-grid"></div>
 
-        <!-- الزر الذكي (يظهر فقط بعد اختيار اللغة) -->
+        <!-- الزر الذكي (يظهر دائمًا، ويبدأ بالإثيوبية) -->
         <div id="discoverSection" class="discover-more-section">
-            <a id="discoverMoreLink" href="https://byenah.com/ar/discover-islam" target="_blank">
-                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">اكتشف المزيد عن الإسلام بلغتك</span>
+            <a id="discoverMoreLink" href="https://byenah.com/am/discover-islam" target="_blank">
+                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">በቋንቋዎ ስለ እስልምና ተጨማሪ ይወቁ</span>
             </a>
         </div>
 
@@ -782,12 +752,7 @@
                             trackEvent('language_select', { language_arabic: arLang, language_native: nativeLang });
                             
                             filterByLang(arLang, nativeLang);
-                            updateDiscoverLink(arLang);
-
-                            const discoverSection = document.getElementById('discoverSection');
-                            if (!discoverSection.classList.contains('visible')) {
-                                discoverSection.classList.add('visible');
-                            }
+                            updateDiscoverLink(arLang); // تحديث الزر عند اختيار لغة
                         });
                     });
 
@@ -796,10 +761,12 @@
                         const firstBtn = document.querySelector(`.lang-card[data-lang-ar="${first.ar}"]`);
                         if (firstBtn) { 
                             firstBtn.classList.add('active'); 
-                            filterByLang(first.ar, first.native); 
-                            updateDiscoverLink(first.ar);
+                            filterByLang(first.ar, first.native);
                         }
                     }
+                    
+                    // تعيين اللغة الإثيوبية افتراضيًا للزر الذكي
+                    updateDiscoverLink('إثيوبي');
                 }
 
                 function filterByLang(arLang, nativeLang) {
