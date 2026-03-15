@@ -328,7 +328,7 @@
         .no-daees { text-align: center; padding: 2rem; background: #f1fcf6; border-radius: 50px; }
         .loading { text-align: center; font-size: 1.3rem; padding: 2rem; }
 
-        /* تحسين عرض الجوال: كل صف يحتوي على زرين بحجم أكبر */
+        /* تحسين عرض الجوال: كل صف يحتوي على زرين بشكل مرتب */
         @media (max-width: 640px) {
             .languages-grid {
                 display: grid;
@@ -340,17 +340,22 @@
                 width: 100%;
                 padding: 0.9rem 0.3rem;
                 font-size: 1.2rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 justify-content: center;
-                white-space: normal;
                 text-align: center;
                 margin: 0;
+                border-radius: 40px;
             }
             .lang-card i {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
+                margin-bottom: 2px;
             }
             .lang-card .native-lang {
                 font-size: 0.9rem;
-                display: block; /* يجعله ينزل لسطر جديد إذا لزم */
+                display: block;
+                line-height: 1.2;
             }
         }
     </style>
