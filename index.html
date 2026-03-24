@@ -147,8 +147,10 @@
 
         /* شبكة الدعاة */
         .daee-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem; margin: 1.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
         .daee-card {
             background: white; border-radius: 32px; padding: 1.5rem;
@@ -321,8 +323,26 @@
             color: #8e6b3c;
         }
 
-        .no-daees { text-align: center; padding: 2rem; background: #f1fcf6; border-radius: 50px; }
+        .no-daees { 
+            text-align: center; 
+            padding: 2rem; 
+            background: #f1fcf6; 
+            border-radius: 50px;
+            font-size: 1.1rem;
+        }
         .loading { text-align: center; font-size: 1.3rem; padding: 2rem; }
+        
+        /* رسالة الترحيب - تضمن توسيطها في شبكة الدعاة */
+        .welcome-message {
+            text-align: center;
+            width: 100%;
+            grid-column: 1 / -1;      /* تجعلها تمتد عبر جميع الأعمدة */
+            padding: 2rem;
+            background: #f1fcf6;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
     </style>
 </head>
 <body>
@@ -349,10 +369,10 @@
         <!-- أزرار اللغات -->
         <div id="languagesGrid" class="languages-grid"></div>
 
-        <!-- الزر الذكي (يظهر دائمًا، ويبدأ بالإثيوبية) -->
+        <!-- الزر الذكي (يظهر دائمًا، نصه عربي افتراضيًا ويتغير عند اختيار اللغة) -->
         <div id="discoverSection" class="discover-more-section">
-            <a id="discoverMoreLink" href="https://byenah.com/am/discover-islam" target="_blank">
-                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">በቋንቋዎ ስለ እስልምና ተጨማሪ ይወቁ</span>
+            <a id="discoverMoreLink" href="https://byenah.com/ar/discover-islam" target="_blank">
+                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">اكتشف المزيد عن الإسلام بلغتك</span>
             </a>
         </div>
 
@@ -426,92 +446,21 @@
 
             // ========== قاموس رموز الأعلام التعبيرية ==========
             const languageEmoji = {
-                'عربي': '🇸🇦',
-                'العربية': '🇸🇦',
-                'إنجليزي': '🇺🇸',
-                'English': '🇺🇸',
-                'إندونيسي': '🇮🇩',
-                'Bahasa Indonesia': '🇮🇩',
-                'سنهالي': '🇱🇰',
-                'සිංහල': '🇱🇰',
-                'Sinhala': '🇱🇰',
-                'بنغالي': '🇧🇩',
-                'বাংলা': '🇧🇩',
-                'Bengali': '🇧🇩',
-                'أوردو': '🇵🇰',
-                'اردو': '🇵🇰',
-                'Urdu': '🇵🇰',
-                'هندي': '🇮🇳',
-                'हिन्दी': '🇮🇳',
-                'Hindi': '🇮🇳',
-                'تيلوغو': '🇮🇳',
-                'తెలుగు': '🇮🇳',
-                'Telugu': '🇮🇳',
-                'مليباري': '🇮🇳',
-                'Malayalam': '🇮🇳',
-                'فلبيني': '🇵🇭',
-                'Tagalog': '🇵🇭',
-                'بشتو': '🇦🇫',
-                'پښتو': '🇦🇫',
-                'Pashto': '🇦🇫',
-                'إثيوبي': '🇪🇹',
-                'አማርኛ': '🇪🇹',
-                'Amharic': '🇪🇹',
-                'أورومو': '🇪🇹',
-                'Afaan Oromoo': '🇪🇹',
-                'Oromo': '🇪🇹',
-                'نيبالي': '🇳🇵',
-                'नेपाली': '🇳🇵',
-                'Nepali': '🇳🇵',
-                'فيتنامي': '🇻🇳',
-                'Tiếng Việt': '🇻🇳',
-                'Vietnamese': '🇻🇳',
-                'أوغندي': '🇺🇬',
-                'Luganda': '🇺🇬',
-                'كيني': '🇰🇪',
-                'Swahili': '🇰🇪',
-                'ملايو': '🇲🇾',
-                'Melayu': '🇲🇾',
-                'تاميلي': '🇱🇰',
-                'தமிழ்': '🇱🇰',
-                'Tamil': '🇱🇰',
-                'ميرناو': '🇵🇭',
-                'Meranau': '🇵🇭',
-                'صومالي': '🇸🇴',
-                'Somali': '🇸🇴',
-                'صيني': '🇨🇳',
-                'Chinese': '🇨🇳',
-                'بنجابي': '🇵🇰',
-                'Punjabi': '🇵🇰',
-                'فارسي': '🇮🇷',
-                'فارسی': '🇮🇷',
-                'Persian': '🇮🇷',
-                'Farsi': '🇮🇷',
-                'أوزبكي': '🇺🇿',
-                'Uzbek': '🇺🇿',
-                'فرنسي': '🇫🇷',
-                'Français': '🇫🇷',
-                'French': '🇫🇷',
-                'برتغالي': '🇵🇹',
-                'Português': '🇵🇹',
-                'Portuguese': '🇵🇹',
-                'ياباني': '🇯🇵',
-                'Japanese': '🇯🇵',
-                'هوسا': '🇳🇬',
-                'Hausa': '🇳🇬',
-                'إسباني': '🇪🇸',
-                'Spanish': '🇪🇸',
-                'ألماني': '🇩🇪',
-                'German': '🇩🇪',
-                'أسباني': '🇪🇸',
-                'تجرينيا': '🇪🇷 🇪🇹',
-                'تيجريني': '🇪🇷 🇪🇹',
-                'ትግርኛ': '🇪🇷 🇪🇹',
-                'Tigrinya': '🇪🇷 🇪🇹',
-                'بورمي': '🇲🇲',
-                'မြန်မာ': '🇲🇲',
-                'Burmese': '🇲🇲',
-                'ميانمار': '🇲🇲',
+                'عربي': '🇸🇦','العربية': '🇸🇦','إنجليزي': '🇺🇸','English': '🇺🇸','إندونيسي': '🇮🇩','Bahasa Indonesia': '🇮🇩',
+                'سنهالي': '🇱🇰','සිංහල': '🇱🇰','Sinhala': '🇱🇰','بنغالي': '🇧🇩','বাংলা': '🇧🇩','Bengali': '🇧🇩',
+                'أوردو': '🇵🇰','اردو': '🇵🇰','Urdu': '🇵🇰','هندي': '🇮🇳','हिन्दी': '🇮🇳','Hindi': '🇮🇳',
+                'تيلوغو': '🇮🇳','తెలుగు': '🇮🇳','Telugu': '🇮🇳','مليباري': '🇮🇳','Malayalam': '🇮🇳',
+                'فلبيني': '🇵🇭','Tagalog': '🇵🇭','بشتو': '🇦🇫','پښتو': '🇦🇫','Pashto': '🇦🇫',
+                'إثيوبي': '🇪🇹','አማርኛ': '🇪🇹','Amharic': '🇪🇹','أورومو': '🇪🇹','Afaan Oromoo': '🇪🇹','Oromo': '🇪🇹',
+                'نيبالي': '🇳🇵','नेपाली': '🇳🇵','Nepali': '🇳🇵','فيتنامي': '🇻🇳','Tiếng Việt': '🇻🇳','Vietnamese': '🇻🇳',
+                'أوغندي': '🇺🇬','Luganda': '🇺🇬','كيني': '🇰🇪','Swahili': '🇰🇪','ملايو': '🇲🇾','Melayu': '🇲🇾',
+                'تاميلي': '🇱🇰','தமிழ்': '🇱🇰','Tamil': '🇱🇰','ميرناو': '🇵🇭','Meranau': '🇵🇭',
+                'صومالي': '🇸🇴','Somali': '🇸🇴','صيني': '🇨🇳','Chinese': '🇨🇳','بنجابي': '🇵🇰','Punjabi': '🇵🇰',
+                'فارسي': '🇮🇷','فارسی': '🇮🇷','Persian': '🇮🇷','Farsi': '🇮🇷','أوزبكي': '🇺🇿','Uzbek': '🇺🇿',
+                'فرنسي': '🇫🇷','Français': '🇫🇷','French': '🇫🇷','برتغالي': '🇵🇹','Português': '🇵🇹','Portuguese': '🇵🇹',
+                'ياباني': '🇯🇵','Japanese': '🇯🇵','هوسا': '🇳🇬','Hausa': '🇳🇬','إسباني': '🇪🇸','Spanish': '🇪🇸',
+                'ألماني': '🇩🇪','German': '🇩🇪','أسباني': '🇪🇸','تجرينيا': '🇪🇷 🇪🇹','تيجريني': '🇪🇷 🇪🇹','ትግርኛ': '🇪🇷 🇪🇹','Tigrinya': '🇪🇷 🇪🇹',
+                'بورمي': '🇲🇲','မြန်မာ': '🇲🇲','Burmese': '🇲🇲','ميانمار': '🇲🇲',
             };
 
             // ========== بيانات الترجمة للأزرار ==========
@@ -617,10 +566,7 @@
                 'أوزبكي': 'uz','Uzbek': 'uz','فرنسي': 'fr','Français': 'fr','برتغالي': 'pt','Português': 'pt',
                 'ياباني': 'ja','Japanese': 'ja','هوسا': 'ha','Hausa': 'ha','إسباني': 'es','Spanish': 'es',
                 'ألماني': 'de','German': 'de','أسباني': 'es','تجرينيا': 'ti','تيجريني': 'ti','ትግርኛ': 'ti','Tigrinya': 'ti',
-                'بورمي': 'my',
-                'မြန်မာ': 'my',
-                'Burmese': 'my',
-                'ميانمار': 'my',
+                'بورمي': 'my','မြန်မာ': 'my','Burmese': 'my','ميانمار': 'my',
             };
 
             // ========== قاموس ترجمة "اكتشف المزيد عن الإسلام بلغتك" ==========
@@ -729,7 +675,15 @@
                 const langGrid = document.getElementById('languagesGrid');
                 const countSpan = document.getElementById('daeeCount');
                 const daeeContainer = document.getElementById('daeeGridContainer');
-                daeeContainer.innerHTML = '';
+                
+                // رسالة ترحيب ثنائية اللغة وتوسيطها
+                daeeContainer.innerHTML = `
+                    <div class="welcome-message">
+                        👈 اختر اللغة من الأعلى لعرض الدعاة المتاحين<br>
+                        👈 Select a language above to view available guides
+                    </div>
+                `;
+                countSpan.innerText = '0';
 
                 function renderLangButtons() {
                     let html = '';
@@ -752,28 +706,21 @@
                             trackEvent('language_select', { language_arabic: arLang, language_native: nativeLang });
                             
                             filterByLang(arLang, nativeLang);
-                            updateDiscoverLink(arLang); // تحديث الزر عند اختيار لغة
+                            updateDiscoverLink(arLang);
                         });
                     });
-
-                    if (uniqueLangs.length > 0) {
-                        const first = uniqueLangs[0];
-                        const firstBtn = document.querySelector(`.lang-card[data-lang-ar="${first.ar}"]`);
-                        if (firstBtn) { 
-                            firstBtn.classList.add('active'); 
-                            filterByLang(first.ar, first.native);
-                        }
-                    }
-                    
-                    // تعيين اللغة الإثيوبية افتراضيًا للزر الذكي
-                    updateDiscoverLink('إثيوبي');
                 }
 
                 function filterByLang(arLang, nativeLang) {
                     const filtered = daees.filter(d => d.langs.some(l => l.ar === arLang && l.native === nativeLang));
                     countSpan.innerText = filtered.length;
                     if (filtered.length === 0) {
-                        daeeContainer.innerHTML = '<div class="no-daees">لا يوجد دعاة متاحون لهذه اللغة حالياً</div>';
+                        daeeContainer.innerHTML = `
+                            <div class="no-daees">
+                                لا يوجد دعاة متاحون لهذه اللغة حالياً<br>
+                                No guides available for this language at the moment
+                            </div>
+                        `;
                         return;
                     }
                     const translation = buttonTranslations[arLang] || buttonTranslations[nativeLang] || { male: 'Chat' };
@@ -809,6 +756,9 @@
                 }
 
                 renderLangButtons();
+
+                // الرابط الافتراضي للزر "اكتشف المزيد" يبقى بالعربية حتى يختار المستخدم لغة
+                updateDiscoverLink('عربي');
 
                 document.getElementById('discoverMoreLink').addEventListener('click', () => trackEvent('discover_more_click'));
                 document.getElementById('society1Link').addEventListener('click', () => trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' }));
