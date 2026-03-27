@@ -369,10 +369,10 @@
         <!-- أزرار اللغات -->
         <div id="languagesGrid" class="languages-grid"></div>
 
-        <!-- الزر الذكي (يظهر دائمًا، نصه عربي افتراضيًا ويتغير عند اختيار اللغة) -->
+        <!-- الزر الذكي: يبدأ بصفحة كل اللغات، وعند اختيار لغة ينتقل إلى الصفحة المخصصة -->
         <div id="discoverSection" class="discover-more-section">
-            <a id="discoverMoreLink" href="https://byenah.com/ar/discover-islam" target="_blank">
-                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">اكتشف المزيد عن الإسلام بلغتك</span>
+            <a id="discoverMoreLink" href="https://byenah.com/ar/discover-islam-languages" target="_blank">
+                <i class="fas fa-globe-asia"></i> <span id="discoverMoreText">اكتشف المزيد عن الإسلام بكل اللغات</span>
             </a>
         </div>
 
@@ -757,8 +757,8 @@
 
                 renderLangButtons();
 
-                // الرابط الافتراضي للزر "اكتشف المزيد" يبقى بالعربية حتى يختار المستخدم لغة
-                updateDiscoverLink('عربي');
+                // لا نقوم بتعيين لغة افتراضية للزر (يبقى رابط اللغات العامة كما هو في HTML)
+                // أي إزالة السطر updateDiscoverLink('عربي') حتى لا يتم استبداله.
 
                 document.getElementById('discoverMoreLink').addEventListener('click', () => trackEvent('discover_more_click'));
                 document.getElementById('society1Link').addEventListener('click', () => trackEvent('general_whatsapp_click', { society: 'جمعية السلامة - جدة' }));
