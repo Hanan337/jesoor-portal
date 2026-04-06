@@ -91,6 +91,18 @@
         .lang-card.active i { color: white; }
         .lang-card .native-lang { font-size: 0.9rem; }
         .lang-emoji { font-size: 1.3rem; line-height: 1; }
+        /* حالة اختيار اللغة — يظهر فقط الزر المختار + زر التغيير */
+        .languages-grid.selected { justify-content: center; gap: 0.7rem; }
+        .languages-grid.selected .lang-card:not(.active) { display: none; }
+        .change-lang-btn {
+            background: white; border: 2px dashed #c0e4d6; border-radius: 50px;
+            padding: 0.6rem 1.2rem; font-size: 1rem; font-weight: 600;
+            color: #5a8a78; cursor: pointer; transition: 0.2s;
+            display: none; align-items: center; gap: 6px;
+            font-family: 'Cairo', sans-serif;
+        }
+        .change-lang-btn:hover { border-color: #1b6d56; color: #1b6d56; background: #f0faf6; }
+        .languages-grid.selected .change-lang-btn { display: inline-flex; }
 
         /* ========== زر الاكتشاف ========== */
         .discover-more-section { text-align: center; margin: 30px auto; }
@@ -244,7 +256,11 @@
     </div>
 
     <!-- أزرار اللغات -->
-    <div id="languagesGrid" class="languages-grid"></div>
+    <div id="languagesGrid" class="languages-grid">
+        <button class="change-lang-btn" id="changeLangBtn">
+            ↩ تغيير اللغة · Change language
+        </button>
+    </div>
 
     <!-- زر الاكتشاف -->
     <div id="discoverSection" class="discover-more-section">
@@ -608,11 +624,18 @@
                     });
                     card.classList.add('active');
                     card.setAttribute('aria-pressed', 'true');
+                    // أخفِ باقي الأزرار وأظهر زر التغيير
+                    langGrid.classList.add('selected');
                     const arLang     = card.dataset.langAr;
                     const nativeLang = card.dataset.langNative;
                     trackEvent('language_select', { language_arabic: arLang, language_native: nativeLang });
                     filterByLang(arLang, nativeLang);
                     updateDiscoverLink(arLang);
+                    // انزل للبطاقات مباشرة
+                    setTimeout(() => {
+                        document.getElementById('daeeGridContainer')
+                            .scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
                 };
                 card.addEventListener('click', activate);
                 // دعم لوحة المفاتيح
@@ -675,6 +698,23 @@
         }
 
         renderLangButtons();
+
+        // زر "تغيير اللغة" — يُعيد إظهار كل الأزرار
+        document.getElementById('changeLangBtn').addEventListener('click', () => {
+            langGrid.classList.remove('selected');
+            langGrid.querySelectorAll('.lang-card').forEach(c => {
+                c.classList.remove('active');
+                c.setAttribute('aria-pressed', 'false');
+            });
+            daeeContainer.innerHTML = `
+                <div class="welcome-message">
+                    👈 اختر اللغة من الأعلى لعرض الدعاة المتاحين<br>
+                    👈 Select a language above to view available guides
+                </div>`;
+            countSpan.textContent = '0';
+            // ارجع للأزرار
+            langGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
 
         // ── ربط أحداث التذييل ──────────────────────────────
         document.getElementById('discoverMoreLink')
