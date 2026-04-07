@@ -104,9 +104,9 @@
         .languages-grid.selected { justify-content: center; gap: 0.5rem; }
         .languages-grid.selected .lang-card:not(.active) { display: none; }
         .change-lang-btn {
-            background: white; border: 2px solid #1b6d56; border-radius: 50px;
+            background: white; border: 1.5px dashed #b0d8c8; border-radius: 50px;
             padding: 0.45rem 1.1rem; font-size: 0.88rem; font-weight: 600;
-            color: #1b6d56; cursor: pointer; transition: .2s;
+            color: #6a9a88; cursor: pointer; transition: .2s;
             display: none; align-items: center; gap: 5px;
             font-family: 'Cairo', sans-serif;
         }
@@ -261,17 +261,6 @@
         .footer-brand strong { color: #5a9a80; font-weight: 600; }
 
         /* ========== حالات خاصة ========== */
-        .skeleton {
-            background: linear-gradient(90deg, #e8f5ef 25%, #d4ece2 50%, #e8f5ef 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s infinite;
-            border-radius: 50px;
-            height: 38px;
-        }
-        @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
         .no-daees {
             text-align: center; padding: 1.5rem; background: #f1fcf6;
             border-radius: 20px; font-size: 1rem;
@@ -381,8 +370,8 @@
 
     <!-- شريط الإحصائيات -->
     <div class="stats-bar">
-        <div class="stat-item"><i class="fas fa-users"></i><span id="totalDaees">…</span> داعية</div>
-        <div class="stat-item"><i class="fas fa-language"></i><span id="totalLangs">…</span> لغة</div>
+        <div class="stat-item"><i class="fas fa-users"></i><span id="totalDaees">0</span> داعية</div>
+        <div class="stat-item"><i class="fas fa-language"></i><span id="totalLangs">0</span> لغة</div>
     </div>
 
     <!-- أزرار اللغات -->
@@ -401,7 +390,7 @@
     </div>
 
     <!-- عداد + شبكة الدعاة -->
-    <div class="counter-badge" id="counterBadge" style="display:none">
+    <div class="counter-badge">
         <i class="fas fa-users"></i> <span id="daeeCount">0</span> داعية متاح
     </div>
     <div id="daeeGridContainer" class="daee-grid">
@@ -710,13 +699,7 @@
         try {
             rawData = await loadData();
         } catch (err) {
-            daeeContainer.innerHTML = `<div class="no-daees" style="display:flex;flex-direction:column;align-items:center;gap:1rem">
-                <span style="font-size:2rem">⚠️</span>
-                <div>تعذّر تحميل البيانات. يُرجى التحقق من اتصالك والمحاولة مجدداً.<br><small style="opacity:.7">Failed to load data. Please check your connection and try again.</small></div>
-                <button onclick="location.reload()" style="background:#1b6d56;color:white;border:none;padding:.6rem 1.4rem;border-radius:50px;font-family:inherit;font-size:.9rem;cursor:pointer;font-weight:600">
-                    🔄 حاول مجدداً · Retry
-                </button>
-            </div>`;
+            daeeContainer.innerHTML = '<div class="no-daees">تعذّر تحميل البيانات. يُرجى المحاولة لاحقاً.<br>Failed to load data. Please try again later.</div>';
             console.error(err);
             return;
         }
@@ -740,10 +723,12 @@
         // تحديث الإحصائيات
         document.getElementById('totalDaees').textContent = daees.length;
         document.getElementById('totalLangs').textContent = uniqueLangs.length;
+
+        // رسالة الترحيب الأولية
         daeeContainer.innerHTML = `
             <div class="welcome-message">
-                ☝ اختر لغتك من الأعلى لعرض الدعاة المتاحين<br>
-                ☝ Select your language above to view available guides
+                👈 اختر اللغة من الأعلى لعرض الدعاة المتاحين<br>
+                👈 Select a language above to view available guides
             </div>`;
         countSpan.textContent = '0';
 
@@ -756,8 +741,7 @@
                 btn.className = 'lang-card';
                 btn.setAttribute('role', 'button');
                 btn.setAttribute('tabindex', '0');
-                btn.setAttribute('aria-pressed', 'false');
-                btn.setAttribute('aria-label', `${lang.ar} ${lang.native}`);
+                btn.dataset.langAr     = lang.ar;
                 btn.dataset.langNative = lang.native;
                 // innerHTML آمن هنا: emoji ثابت، والنصوص من قاموسنا لا من المستخدم
                 btn.innerHTML = `
@@ -781,7 +765,6 @@
                     const nativeLang = card.dataset.langNative;
                     trackEvent('language_select', { language_arabic: arLang, language_native: nativeLang });
                     filterByLang(arLang, nativeLang);
-                    document.getElementById('counterBadge').style.display = 'block';
                     updateDiscoverLink(arLang);
                     // انزل للبطاقات مباشرة
                     setTimeout(() => {
@@ -835,7 +818,6 @@
                        href="https://wa.me/${esc(d.number)}"
                        target="_blank"
                        rel="noopener noreferrer"
-                       aria-label="تواصل مع ${esc(d.name)} عبر واتساب"
                        data-preacher="${esc(d.name)}">
                         <i class="fab fa-whatsapp"></i> انقر للتحدث معه (${esc(word)})
                     </a>`;
@@ -859,11 +841,10 @@
                 c.classList.remove('active');
                 c.setAttribute('aria-pressed', 'false');
             });
-            document.getElementById('counterBadge').style.display = 'none';
             daeeContainer.innerHTML = `
                 <div class="welcome-message">
-                    ☝ اختر لغتك من الأعلى لعرض الدعاة المتاحين<br>
-                    ☝ Select your language above to view available guides
+                    👈 اختر اللغة من الأعلى لعرض الدعاة المتاحين<br>
+                    👈 Select a language above to view available guides
                 </div>`;
             countSpan.textContent = '0';
             // ارجع للأزرار
