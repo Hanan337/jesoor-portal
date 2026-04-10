@@ -105,15 +105,23 @@
         .languages-grid.selected { justify-content: center; gap: 0.5rem; }
         .languages-grid.selected .lang-card:not(.active) { display: none; }
         .change-lang-btn {
-            background: #f0faf5; border: 1.5px solid #c0e4d6; border-radius: 50px;
-            padding: 0.45rem 1.2rem; font-size: 0.88rem; font-weight: 600;
-            color: #1b6d56; cursor: pointer; transition: .2s;
-            display: none; align-items: center; gap: 6px;
+            background: white;
+            border: 1.5px solid #c0e4d6;
+            border-radius: 50px;
+            padding: 0.45rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #5a8a78;
+            cursor: pointer;
+            transition: .2s;
+            display: none;
+            align-items: center;
+            gap: 6px;
             font-family: 'Cairo', sans-serif;
-            box-shadow: 0 2px 6px rgba(0,40,20,.08);
+            box-shadow: 0 2px 6px rgba(0,40,20,.06);
         }
-        .change-lang-btn:hover { border-color: #1b6d56; background: #e4f5ed; transform: translateY(-1px); }
-        .change-lang-btn:active { transform: scale(0.97); background: #d8f0e6; }
+        .change-lang-btn:hover { border-color: #1b6d56; color: #1b6d56; background: #f4fbf7; transform: translateY(-1px); }
+        .change-lang-btn:active { transform: scale(0.97); }
         .languages-grid.selected .change-lang-btn { display: inline-flex; }
 
         /* ========== زر الاكتشاف ========== */
@@ -242,6 +250,16 @@
         .footer-info p {
             font-size: 0.88rem; color: #4a7a68; line-height: 1.7; margin-bottom: 0.8rem;
         }
+        .footer-info p.disclaimer {
+            font-size: 0.8rem;
+            color: #8aab98;
+            line-height: 1.65;
+            margin-bottom: 0.8rem;
+            padding: 0.6rem 0.9rem;
+            background: #f8fdfb;
+            border-radius: 10px;
+            border-right: 3px solid #c8e6d8;
+        }
         .footer-links {
             display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0;
         }
@@ -314,7 +332,7 @@
             .lang-card i { font-size: 0.9rem; }
 
             /* زر تغيير اللغة */
-            .change-lang-btn { font-size: 0.82rem; padding: 0.4rem 1rem; min-height: 40px; }
+            .change-lang-btn { font-size: 0.8rem; padding: 0.4rem 0.9rem; min-height: 40px; }
 
             /* زر الاكتشاف */
             .discover-more-section { margin: 0.6rem auto; }
@@ -347,6 +365,7 @@
             .footer-section { padding: 1rem 1.1rem; border-radius: 16px; }
             .footer-section-header h3 { font-size: 0.92rem; }
             .footer-info p { font-size: 0.82rem; }
+            .footer-info p.disclaimer { font-size: 0.76rem; padding: 0.5rem 0.7rem; }
             .footer-info a { font-size: 0.82rem; padding: 0.35rem 0.9rem; }
             .footer-brand { font-size: 0.75rem; }
         }
@@ -384,8 +403,8 @@
 
     <!-- أزرار اللغات -->
     <div id="languagesGrid" class="languages-grid">
-        <button class="change-lang-btn" id="changeLangBtn">
-            <i class="fas fa-arrow-right"></i> تغيير اللغة
+        <button class="change-lang-btn" id="changeLangBtn" aria-label="العودة لقائمة اللغات">
+            <i class="fas fa-th-list"></i> كل اللغات
         </button>
     </div>
 
@@ -398,7 +417,7 @@
     </div>
 
     <!-- عداد + شبكة الدعاة -->
-    <div class="counter-badge">
+    <div class="counter-badge" id="counterBadge" style="display:none;">
         <i class="fas fa-users"></i> <span id="daeeCount">0</span> داعية متاح
     </div>
     <div id="daeeGridContainer" class="daee-grid">
@@ -794,6 +813,7 @@
                 d.langs.some(l => l.ar === arLang && l.native === nativeLang)
             );
             countSpan.textContent = filtered.length;
+            document.getElementById('counterBadge').style.display = 'block';
 
             if (filtered.length === 0) {
                 daeeContainer.innerHTML = `
@@ -855,6 +875,7 @@
                     👈 Select a language above to view available guides
                 </div>`;
             countSpan.textContent = '0';
+            document.getElementById('counterBadge').style.display = 'none';
             // ارجع للأزرار
             langGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
