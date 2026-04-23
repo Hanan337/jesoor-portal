@@ -105,22 +105,23 @@
         .languages-grid.selected { justify-content: center; gap: 0.5rem; }
         .languages-grid.selected .lang-card:not(.active) { display: none; }
         .change-lang-btn {
-            background: white;
-            border: 1.5px solid #c0e4d6;
+            background: #1b6d56;
+            border: none;
             border-radius: 50px;
-            padding: 0.45rem 1.1rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #5a8a78;
+            padding: 0.65rem 1.4rem;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: white;
             cursor: pointer;
             transition: .2s;
             display: none;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-family: 'Cairo', sans-serif;
-            box-shadow: 0 2px 6px rgba(0,40,20,.06);
+            box-shadow: 0 4px 14px rgba(27,109,86,.35);
+            margin: 0.3rem auto 0.5rem;
         }
-        .change-lang-btn:hover { border-color: #1b6d56; color: #1b6d56; background: #f4fbf7; transform: translateY(-1px); }
+        .change-lang-btn:hover { background: #155c47; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(27,109,86,.4); }
         .change-lang-btn:active { transform: scale(0.97); }
         .languages-grid.selected .change-lang-btn { display: inline-flex; }
 
@@ -404,7 +405,7 @@
     <!-- أزرار اللغات -->
     <div id="languagesGrid" class="languages-grid">
         <button class="change-lang-btn" id="changeLangBtn" aria-label="العودة لقائمة اللغات">
-            <i class="fas fa-th-list"></i> كل اللغات
+            <i class="fas fa-arrow-right"></i> عرض كل اللغات
         </button>
     </div>
 
@@ -550,6 +551,7 @@
         'German':'🇩🇪','أسباني':'🇪🇸','تجرينيا':'🇪🇷','تيجريني':'🇪🇷',
         'ትግርኛ':'🇪🇷','Tigrinya':'🇪🇷','بورمي':'🇲🇲','မြန်မာ':'🇲🇲',
         'Burmese':'🇲🇲','ميانمار':'🇲🇲',
+        'بوروندي':'🇧🇮','Ikirundi':'🇧🇮','كيرندي':'🇧🇮',
     };
 
     // كلمة "تحدث" بلغة المستخدم — دعاة فقط (مفتاح male فقط)
@@ -588,6 +590,7 @@
         'تجرينيا':'ተዛረብ','تيجريني':'ተዛረብ','ትግርኛ':'ተዛረብ','Tigrinya':'ተዛረብ',
         'بورمي':'စကားပြောရန်','မြန်မာ':'စကားပြောရန်',
         'Burmese':'စကားပြောရန်','ميانمار':'စကားပြောရန်',
+        'بوروندي':'Ganira','Ikirundi':'Ganira','كيرندي':'Ganira',
     };
 
     const bayyinahLangMap = {
@@ -609,6 +612,7 @@
         'ألماني':'de','German':'de','تجرينيا':'ti','تيجريني':'ti',
         'ትግርኛ':'ti','Tigrinya':'ti','بورمي':'my','မြန်မာ':'my',
         'Burmese':'my','ميانمار':'my',
+        'بوروندي':'rn','Ikirundi':'rn','كيرندي':'rn',
     };
 
     const discoverTranslations = {
@@ -644,6 +648,7 @@
         'de':'Entdecken Sie mehr über den Islam in Ihrer Sprache',
         'ti':'ብቋንቋኻ ብዛዕባ እስልምና ተወሳኺ ፍለጥ',
         'my':'မြန်မာဘာသာဖြင့် အစ္စလာမ်အကြောင်း ပိုမိုရှာဖွေပါ',
+        'rn':'Menya vyinshi ku bijanye na Islamu mu rurimi rwawe',
     };
 
     // ── تحديث رابط ونص زر الاكتشاف ────────────────────────
